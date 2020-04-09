@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>b765f4f0-7cf1-4c0a-9417-1088959df9e3</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Kubernetes.Tools.Targets" Version="1.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.Service\Contoso.DigitalGoods.DigitalLocker.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.ServiceWrapper\Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TokenNumberManager\Contoso.DigitalGoods.TokenService.TokenNumberManager.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TransactionIndexer\Contoso.DigitalGoods.TokenService.TokenTransactionIndexer.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService\Contoso.DigitalGoods.TokenService.csproj" />
+  </ItemGroup>
+
+
+</Project>

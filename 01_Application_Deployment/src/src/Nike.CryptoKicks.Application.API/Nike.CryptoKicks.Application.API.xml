@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nike.CryptoKicks.Application.API</name>
+    </assembly>
+    <members>
+        <member name="M:Nike.CryptoKicks.Application.API.Controllers.CryptoKicksGiftController.ResolveURLAndTransferGiftToken(System.String)">
+            <summary>
+            Get Encrypted URL and resolve information then Transfer token to User
+            </summary>
+            <param name="encryptedGiftID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nike.CryptoKicks.Application.API.Controllers.UserProfileController">
+            <summary>
+            User Profile Service API
+            </summary>
+        </member>
+        <member name="M:Nike.CryptoKicks.Application.API.Controllers.UserProfileController.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Nike.CryptoKicks.NikeProfile.Service.INikeProfileManager)">
+            <summary>
+            
+            </summary>
+            <param name="httpContextAccessor"></param>
+            <param name="ProfileManager"></param>
+        </member>
+        <member name="M:Nike.CryptoKicks.Application.API.Controllers.UserProfileController.ProvisionUser(System.String)">
+            <summary>
+            Provisioning User's Digital Locker and Registering ABT User ID
+            </summary>
+            <param name="NikeIdentifier">Nike User Identifier which can be get through Nike Authentication</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nike.CryptoKicks.Application.API.Controllers.UserProfileController.GetABTUserID(System.String)">
+            <summary>
+            Return ABT UserID from NikeIdentifier
+            </summary>
+            <param name="NikeIdentifier"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

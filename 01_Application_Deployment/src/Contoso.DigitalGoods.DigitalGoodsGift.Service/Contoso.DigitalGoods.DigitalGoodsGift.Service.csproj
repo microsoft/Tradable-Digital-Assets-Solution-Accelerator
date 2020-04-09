@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.ContosoProfile.Service\Contoso.DigitalGoods.ContosoProfile.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenAPI.Proxy\Contoso.DigitalGoods.TokenAPI.Proxy.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
+  </ItemGroup>
+
+</Project>
