@@ -28,7 +28,7 @@ For additional training and support, please see:
 ## Getting Started and Process Overview
 Clone/download this repo onto your computer and then walk through each of these folders in order, following the steps outlined in each of the README files.  After completion of all steps, you will have a working solution with the following architecture:
 
-![Microservices Architecture](./References/architecture.JPG)
+![Microservices Architecture](./References/Architecture-Current.png)
 
 
 ### [00 - Resource Deployment](./00_Resource_Deployment)
