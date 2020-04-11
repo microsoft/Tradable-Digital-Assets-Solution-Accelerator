@@ -26,7 +26,7 @@ As an alternative to running the PowerShell script, you can deploy the resources
 
 ## Steps for Resource Deployment via PowerShell
 
-To run the [PowerShell script](./deploy.ps1):
+To run the [PowerShell script](./00_DeployDigitalGoods.ps1):
 
 1. Modify the parameters at the top of **00_DeployDigitalGoods.ps1** to configure the names of your resources and other settings.   
 2. Run the [PowerShell script](./00_DeployDigitalGoods.ps1). If you have PowerShell opened to this folder run the command:
@@ -35,8 +35,11 @@ To run the [PowerShell script](./deploy.ps1):
 
 **Important:  For the 00_DeployDigitalGoods yo need Check the names and execute once you need be careful to choose the name of KeyVault**
 
-4. Modify the parameters at the top of **01_DeploySecrets.ps1** to configure the names of your resources and other settings.   
-3. Run the [PowerShell script](./01_DeploySecrets.ps1). If you have PowerShell opened to this folder run the command:
+
+To run the [PowerShell script](./01_DeploySecrets.ps1):
+
+1. Modify the parameters at the top of **01_DeploySecrets.ps1** to configure the names of your resources and other settings.   
+2. Run the [PowerShell script](./01_DeploySecrets.ps1). If you have PowerShell opened to this folder run the command:
 `./01_DeploySecrets.ps1`
 3. You will then be prompted to login and provide additional information.
 
