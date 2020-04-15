@@ -35,10 +35,10 @@ This project contains a number of components described below.
 
   # _Application Api_ Endpoints
 
-  ![App Endpoints](../Reference/ApplicationApi.png)
+  ![App Endpoints](../Reference/Apis/ApplicationApi.png)
 
 
   # _Token Api_ Endpoints
 
-  ![Token Endpoints](../Reference/TokenApi.png)
+  ![Token Endpoints](../Reference/Apis/TokenApi.png)
  
