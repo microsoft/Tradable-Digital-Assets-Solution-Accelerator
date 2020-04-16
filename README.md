@@ -28,7 +28,7 @@ For additional training and support, please see:
 ## Getting Started and Process Overview
 Clone/download this repo onto your computer and then walk through each of these folders in order, following the steps outlined in each of the README files.  After completion of all steps, you will have a working solution with the following architecture:
 
-![Microservices Architecture](./Reference/Architecture-Current.png)
+![Microservices Architecture](./Reference/Architecture/Architecture-Current.png)
 
 
 ### [00 - Resource Deployment](./00_Resource_Deployment)
@@ -40,7 +40,10 @@ After deployed, you will have a Cosmos DB account and database, Azure storage, K
 This folder contains the .net Solution that contains the API services that provide the funcionality to Sign up and Login to users, Catalog and Products and Gifts Manage like Digital Assets.
 
 ## Links
-Hosted Site: [Tradable Digital Assets Solution Accelerator](http://healthcare-apphosting.southcentralus.cloudapp.azure.com/login), you can use scripts to consume the endpoints.
+Hosteds Site:
+* [Tradable Digital Assets Solution Accelerator](http://40.91.114.29/swagger/index.html), you can use scripts to consume the endpoints.
+
+* [Tradable Digital Assets Solution Accelerator](http://40.91.73.177/swagger/index.html), you can use scripts to consume the endpoints.
 
 ## License
 Copyright (c) Microsoft Corporation
