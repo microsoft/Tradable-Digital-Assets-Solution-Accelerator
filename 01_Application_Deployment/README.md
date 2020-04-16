@@ -31,9 +31,9 @@ This project contains a number of components described below.
 | Token Api  | Manage the generation of Tokens for different actions for the application|                                                     |
 
 
- # Using the Application
+ # Using the Application  
 
- To use the services of this application we attach some [scripts](./Scripts.zip) script of sample to execute that operation in Postman. Each operation is specified in the next images.
+ To use the services of this application we attach some [scripts](./Scripts.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
  
 
   # _Application Api_ Endpoints
