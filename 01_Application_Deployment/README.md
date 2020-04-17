@@ -15,7 +15,7 @@ There are a few modifications to the [Contoso.DigitalGoodsToken.sln](./src/./src
 
 ## Options to Run/Deploy our Code
 
-1.- Local with visual Studio
+**1.- Local with visual Studio**
 
 # Steps
 1. Open [Contoso.DigitalGoodsToken.sln](./src/Contoso.DigitalGoodsToken.sln) in Visual Studio (as Admin)
@@ -24,9 +24,32 @@ There are a few modifications to the [Contoso.DigitalGoodsToken.sln](./src/./src
 
 In the Next images we have the specif steps to execute the solution:
 
+* Go to Properties of Solution.
+
+![1 ](./Local/1.png)
+
+* Select Multiple Starup and Select the projects Contoso.DigitalGood.Application.API and Contoso.Digital.TokenService.API.
+
+![2 ](./Local/2.png)
+
+* Run
+
+![3 ](./Local/3.png)
+
+* You can see two Browsers with a message 404. Yo need Modify and delete the word "weatherforecast" and replace by "swagger"
+
+![4 ](./Local/4.png)
+
+* You can see the operations avalilable and test with the scripts or consume in other way
+
+![6 ](./Local/6.png)
+
+![7 ](./Local/7.png)
+
+* You need configure the connections strings, secrets and configure JWT information for each project in the appsetting.json.
 
 
-2.- Create a Image and Deploy in our Container to Kubernates
+**2.- Create a Image and Deploy in our Container to Kubernates**
 
 You can either run the application locally or hosted using Kubernates in your resource group. In the project **Contoso.DigitalGoods.Application.API** have a DockerFile to build the image.
 
