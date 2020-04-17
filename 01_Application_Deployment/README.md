@@ -51,7 +51,40 @@ In the Next images we have the specif steps to execute the solution:
 
 **2.- Create a Image and Deploy in our Container to Kubernates**
 
-You can either run the application locally or hosted using Kubernates in your resource group. In the project **Contoso.DigitalGoods.Application.API** have a DockerFile to build the image.
+Other option is build a image with  build of docker and deploy to the container and we have create a pipeline.
+
+This pipeline can you execute in automatic with azure devops or manually installing Docker and execute all in command line and helping with visual studio.
+
+The steps by step have the next points:
+
+* Build a Image (With a Docker build)
+* Push the Image to Container Registry
+* Publish the Artifact
+* Download the Artifact
+* Create a Image
+* Deploy Image to Kubernates
+
+In our case we need create this operation for our two services **Token.API** and  **Application.API**.
+
+In our project we have the files necesaries to create a pipeline.
+
+A sample of [pipeline](./azure-pipelines.yml) that we use in azure devops. 
+
+This file have dependencies the DockerFiles for each project:
+
+A sample of Docker File build a image are in each project [ApplicationApi](./src/Contoso.DigitalGoods.Application.API/Dockerfile) and [TokenApi](./src/Contoso.DigitalGoods.TokenService.API/Dockerfile)
+
+An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
+
+
+
+
+
+
+
+
+
+
 
 
 
