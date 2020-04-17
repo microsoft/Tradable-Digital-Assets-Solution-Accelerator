@@ -13,13 +13,24 @@ There are a few modifications to the [Contoso.DigitalGoodsToken.sln](./src/./src
 2. [Visual Studio](https://visualstudio.microsoft.com/)
 3. Updated connection strings
 
-## Options
-You can either run the application locally or hosted using Kubernates in your resource group. In the project **Contoso.DigitalGoods.Application.API** have a DockerFile to build the image.
+## Options to Run/Deploy our Code
+
+1.- Local with visual Studio
 
 # Steps
 1. Open [Contoso.DigitalGoodsToken.sln](./src/Contoso.DigitalGoodsToken.sln) in Visual Studio (as Admin)
 2. Build Project
 3. Run the **Contoso.DigitalGoods.Application.API** project or **Microsoft.Azure.TokenService** project to activate the different endpoints. In other case yo can configure the execution for both projects.
+
+In the Next images we have the specif steps to execute the solution:
+
+
+
+2.- Create a Image and Deploy in our Container to Kubernates
+
+You can either run the application locally or hosted using Kubernates in your resource group. In the project **Contoso.DigitalGoods.Application.API** have a DockerFile to build the image.
+
+
 
 
 ## Components
