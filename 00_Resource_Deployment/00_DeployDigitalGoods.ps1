@@ -10,7 +10,7 @@ $containerregistry = 'ContosoDigitalGoods'
 $kubernateservice = 'kubeContosoDigitalGoods'
 $azureblockchaineservice = 'member01digitalgoods'
 $propertiesservice = '{\"location\":\"westus2\", \"properties\":{\"password\":\"DigitalGoods@1\", \"protocol\":\"Quorum\", \"consortium\":\"digitalgoodsconsotiumsample\", \"consortiumManagementAccountPassword\":\"DigitalGoods@1\"}, \"sku\":{\"name\":\"S0\"}}'
-
+ 
 az login
 az account set --subscription $subscriptionID
 
