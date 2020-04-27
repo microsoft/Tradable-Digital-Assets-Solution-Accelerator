@@ -100,15 +100,21 @@ This project contains a number of components described below.
 
  # Using the Application  
 
- To use the services of this application we attach some [scripts](./Scripts.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
+ 
  
 
   # _Application Api_ Endpoints
 
+
+To use the services of this application we attach some [scripts](./Scripts.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
+
   ![App Endpoints](../Reference/Apis/ApplicationApi.png)
 
 
-  # _Token Api_ Endpoints
+  # _Microsoft Token Service Api_ Endpoints
 
-  ![Token Endpoints](../Reference/Apis/TokenApi.png)
- 
+
+To use the services of this application we attach some [scripts](./Postman_B.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
+
+  ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_1.png)
+ ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_2.png)

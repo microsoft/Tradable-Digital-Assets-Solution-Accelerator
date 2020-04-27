@@ -43,7 +43,7 @@ This folder contains the .net Solution that contains the API services that provi
 Hosteds Site:
 * [Tradable Digital Assets Solution Accelerator](http://40.91.114.29/swagger/index.html), you can use scripts to consume the endpoints.
 
-* [Tradable Digital Assets Solution Accelerator](http://40.91.73.177/swagger/index.html), you can use scripts to consume the endpoints.
+* [Tradable Digital Assets Solution Accelerator](http://52.137.97.182/swagger/index.html), you can use scripts to consume the endpoints.
 
 ## License
 Copyright (c) Microsoft Corporation
