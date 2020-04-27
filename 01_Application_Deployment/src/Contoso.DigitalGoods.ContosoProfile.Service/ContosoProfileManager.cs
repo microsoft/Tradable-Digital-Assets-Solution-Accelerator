@@ -1,7 +1,6 @@
-﻿
-
+﻿using Contoso.DigitalGoods.ContosoProfile.Service.Models;
 using Contoso.DigitalGoods.OffChain;
-using Contoso.DigitalGoods.TokenAPI.Proxy;
+using Contoso.DigitalGoods.TokenService.ServiceWrapper;
 using Contoso.DigitalGoods.TokenService.OffChain.ModelBase;
 using System;
 using System.Threading.Tasks;
@@ -12,10 +11,14 @@ namespace Contoso.DigitalGoods.ContosoProfile.Service
     {
 
         private string tokenServiceURL;
+        private string partyID;
+        private string blockchainNetworkID;
 
-        public ContosoProfileManager(string DataConnectionString, string CollectionName, string TokenServiceURL) : base(DataConnectionString, CollectionName)
+        public ContosoProfileManager(string DataConnectionString, string CollectionName, string TokenServiceURL, string PartyID, string BlockchainNetworkID) : base(DataConnectionString, CollectionName)
         {
             tokenServiceURL = TokenServiceURL;
+            partyID = PartyID;
+            blockchainNetworkID = BlockchainNetworkID;
         }
 
         /// <summary>
@@ -34,19 +37,24 @@ namespace Contoso.DigitalGoods.ContosoProfile.Service
                 if (CheckForContosoDuplicates(ContosoID) == false)
                     throw new Exception("Contoso Profile already exists. Can't provision user's Contoso Profile");
 
-
-                Client _proxy = new Client(tokenServiceURL, new System.Net.Http.HttpClient());
-
+                TokenAPI.Proxy.Client accountService = new TokenAPI.Proxy.Client(tokenServiceURL);
+                
                 //SHOULD Invoke TokenAPI Provision then get ABT User ID first.
-                string ABTUserID = await _proxy.Users2Async(ContosoID);
+                var abtAccount = await accountService.ProvisioningUserAsync(ContosoID);
+                var user = await accountService.GetUserInfoAsync(abtAccount);
 
-                var newContosoProfile = new Models.ContosoProfile() { ContosoID = ContosoID, ABTUserID = ABTUserID };
+                var newContosoProfile = new Models.ContosoProfile() { ContosoID = ContosoID, 
+                                                                      ABTUserID = abtAccount,
+                                                                      Id = Guid.NewGuid(), 
+                                                                      PublicAddress = user.PublicAddress };
+
                 var provisionedContosoProfile = await this.ObjectCollection.SaveAsync(newContosoProfile);
 
                 return provisionedContosoProfile;
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
+                throw ex;
                 return null;
             }
         }

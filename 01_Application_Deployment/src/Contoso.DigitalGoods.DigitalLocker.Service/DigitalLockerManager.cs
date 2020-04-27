@@ -45,11 +45,6 @@ namespace Contoso.DigitalGoods.DigitalLocker.Service
             return true;
         }
 
-        public Task AddCryptoKics(string userid, TokenAPI.Proxy.Asset cryptoGood)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Asset> GetAllUserCryptoGoods(string UserID)
         {
             var userLocker = this.ObjectCollection.Find(new GenericSpecification<Models.DigitalLocker>(x => x.UserID == UserID));

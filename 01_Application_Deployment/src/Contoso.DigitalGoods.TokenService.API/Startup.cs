@@ -2,6 +2,7 @@ using Contoso.DigitalGoods.TokenService.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,7 +17,7 @@ namespace Contoso.DigitalGoods.TokenService.API
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+         Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -50,9 +51,11 @@ namespace Contoso.DigitalGoods.TokenService.API
             //Register swagger gen
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contoso CryptoGood's Blockchain Service Endpoint", Version = "v1" });
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Contoso.DigitalGoods.TokenService.API.xml");
-                c.IncludeXmlComments(filePath);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contoso DigitalGood's Blockchain Service Endpoint", Version = "v1" });
+                c.CustomOperationIds(d => (d.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
+
+                //var filePath = Path.Combine(System.AppContext.BaseDirectory, "Contoso.DigitalGoods.TokenService.API.xml");
+                //c.IncludeXmlComments(filePath);
             });
             services.AddSwaggerGenNewtonsoftSupport();
 
@@ -62,7 +65,9 @@ namespace Contoso.DigitalGoods.TokenService.API
                 return new ServiceAgent(Configuration["Values:TokenID"],
                                         Configuration["Values:ContosoProductManager"],
                                         Configuration["Values:ContosoID"],
-                                        Configuration["Values:GroupName"],
+                                        Configuration["Values:PartyID"],
+                                        Configuration["Values:BlockchainNetworkID"],
+                                        Configuration["Values:ServiceEndpoint"],
                                         Configuration["Values:offchain_connectionstring"]);
             });
         }
@@ -75,7 +80,7 @@ namespace Contoso.DigitalGoods.TokenService.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

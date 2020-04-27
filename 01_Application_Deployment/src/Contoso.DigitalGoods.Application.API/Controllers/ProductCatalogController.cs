@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Contoso.DigitalGoods.Application.API.Controllers
 {
     //[Authorize]
-    [Route("CryptoGoodsApp/Management/Products")]
+    [Route("DigitalGoodsApp/Management/Products")]
     [ApiController]
     public class ProductCatalogController : ControllerBase
     {

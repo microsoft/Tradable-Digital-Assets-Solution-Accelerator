@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
     <ProjectReference Include="..\Microsoft.Azure.TokenService\Microsoft.Azure.TokenService.csproj" />
+    <ProjectReference Include="..\Contoso.CryptoGoods.TokenService.OffChain\Contoso.CryptoGoods.OffChain.csproj" />
   </ItemGroup>
 
 </Project>

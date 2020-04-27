@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       labels:
-        app: contosodigitalgoods
+        app: contosodigitalgoods 
     spec:
       containers:
         - name: contosodigitalgoods 

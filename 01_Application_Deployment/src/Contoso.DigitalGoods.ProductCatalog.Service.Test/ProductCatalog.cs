@@ -1,25 +1,25 @@
 using Contoso.DigitalGoods.ProductCatalog.Service.Models;
+using Contoso.DigitalGoods.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
 namespace Contoso.DigitalGoods.ProductCatalog.Service.Test
 {
     [TestClass]
-    public class ProductCatalog
+    public class ProductCatalog : TestBase
     {
-        private string productID;
-        private string productSubID;
-        private string productDes;
-        private string mongoConnectionString;
+        private static string productID;
+        private static string productSubID;
+        private static string productDes;
+        private static string mongoConnectionString;
         private ProductCatalogManager _manager;
-        private string tokenAPIURL;
+        
 
         [TestInitialize]
         public void InitTest()
         {
             //connstring should be removed
-            mongoConnectionString = "mongodb://cryptogood-app:PbUAtgv7QITNdy3fILD6s7CWVJYIzHXFDRpfYKhlNif1btbgwSX5ujbSq2ck9xNClucfMuoMWDrQOeg3jNQBlQ==@cryptogood-app.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
-            tokenAPIURL = "http://http://13.66.94.77/";
+            mongoConnectionString = Config["Values:offchain_appconnectionstring"];
             productID = "TestProduct";
             productSubID = "TestSub";
             productDes = "TestDes";
@@ -29,7 +29,7 @@ namespace Contoso.DigitalGoods.ProductCatalog.Service.Test
         }
 
         [TestMethod]
-        public async Task RegisterProduct()
+        public async Task Test0_RegisterProduct()
         {
             var product = new ProductInfo()
             {
@@ -46,7 +46,7 @@ namespace Contoso.DigitalGoods.ProductCatalog.Service.Test
         }
 
         [TestMethod]
-        public void DeleteFakeProduct()
+        public void Test2_DeleteFakeProduct()
         {
             productID = "NotARealProduct";
             var result = _manager.UnRegisterProductCatalog(productID);
@@ -54,11 +54,11 @@ namespace Contoso.DigitalGoods.ProductCatalog.Service.Test
         }
 
         [TestMethod]
-        public void GetTestProductAsync()
+        public void Test1_GetTestProductAsync()
         {
             productID = "TestProductDontDelete";
             var result = _manager.GetProductInfo(productID);
-            ; Assert.IsInstanceOfType(result, typeof(ProductInfo));
+            Assert.IsInstanceOfType(result, typeof(ProductInfo));
         }
     }
 }

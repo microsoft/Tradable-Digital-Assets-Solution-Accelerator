@@ -15,12 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contoso.DigitalGoods.ProductCatalog.Service\Contoso.DigitalGoods.ProductCatalog.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="application.settings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Contoso.DigitalGoods.Test\Contoso.DigitalGoods.Test.csproj" />
   </ItemGroup>
 
 </Project>

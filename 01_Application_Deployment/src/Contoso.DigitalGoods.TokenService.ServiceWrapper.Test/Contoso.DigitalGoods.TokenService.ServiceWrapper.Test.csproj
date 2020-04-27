@@ -14,14 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.Test\Contoso.DigitalGoods.Test.csproj" />
     <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.ServiceWrapper\Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj" />
-    <ProjectReference Include="..\Microsoft.Azure.TokenService\Microsoft.Azure.TokenService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="application.settings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TokenNumberManager\Contoso.DigitalGoods.TokenService.TokenNumberManager.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-
 using Contoso.DigitalGoods.DigitalLocker.Service.Models;
+using Contoso.DigitalGoods.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
@@ -7,41 +7,52 @@ using System.Threading.Tasks;
 namespace Contoso.DigitalGoods.TokenService.Test
 {
     [TestClass]
-    public class UserManager
+    public class UserManager : TestBase
     {
 
         private string mongoConnectionString;
+
+        private static string partyid;
+        private static string blockchainNetworkid;
+        private static string serviceEndpoint;
+        private static string abtUserID;
 
         [TestInitialize]
         public void InitializeTest()
         {
             //connstring should be removed
-            mongoConnectionString = "mongodb://Contosoadmin:GEM7MGtrl2KyJ4P4rrQPTiGizFbn8PJdWvrZwlbRV9Gkl3sFlMyMTIdOGF9hHVM8F6m37BWiQOuZJKRGDYX9GA==@Contosoadmin.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+            mongoConnectionString = Config["Values:offchain_connectionstring"];
+            if(partyid == null) partyid = Config["Values:PartyID"];
+
+            if (blockchainNetworkid == null) blockchainNetworkid = Config["Values:BlockchainNetworkID"];
+
+            if (serviceEndpoint == null) serviceEndpoint = Config["Values:ServiceEndpoint"];
+
         }
 
-        //[TestMethod]
-        //public async Task TEST_1_ProvisionUser()
-        //{
-        //    TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString);
-        //    TokenAPIService tokenAPIConnection = new TokenAPIService();
+        [TestMethod]
+        public async Task TEST_1_ProvisionUser()
+        {
+            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString, serviceEndpoint,partyid, blockchainNetworkid);
+            var result = await userManager.ProvisionUser(Guid.NewGuid().ToString());
 
-        //    var result = await userManager.ProvisionUser(Guid.NewGuid().ToString());
+            Console.WriteLine($"provisioned user ABT id is {result}");
 
-        //    Console.WriteLine($"provisioned user ABT id is {result}");
+            abtUserID = result;
 
-        //    Assert.IsNotNull(result);
-        //}
+            Assert.IsNotNull(result);
+        }
 
         [TestMethod]
         public async Task TEST_2_PutCryptoGoodToLocker()
         {
-            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString);
+            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString,serviceEndpoint,partyid,blockchainNetworkid);
 
-            var result = await userManager.PutCryptoGoodToLocker("bac0558f-f706-4465-acda-8eb701913032",
+            var result = await userManager.PutCryptoGoodToLocker(abtUserID,
                 new Asset()
                 {
                     ProductId = Guid.NewGuid().ToString(),
-                    Name = "Air Jordan"
+                    Name = "myDigitalGood"
                 });
 
             Assert.IsNotNull(result);
@@ -50,10 +61,10 @@ namespace Contoso.DigitalGoods.TokenService.Test
         [TestMethod]
         public void TEST_3_GetAllUserCryptoGoods()
         {
-            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString);
+            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString, serviceEndpoint, partyid, blockchainNetworkid);
 
-            var result = userManager.GetAllUserCryptoGoods("bac0558f-f706-4465-acda-8eb701913032");
-            result.ForEach(x => Console.WriteLine($"CryptoKics - id : {x.ProductId}"));
+            var result = userManager.GetAllUserCryptoGoods(abtUserID);
+            result.ForEach(x => Console.WriteLine($"DigitalGood - id : {x.ProductId}"));
 
             Assert.IsTrue(result.Count >= 0);
         }
@@ -61,21 +72,21 @@ namespace Contoso.DigitalGoods.TokenService.Test
         [TestMethod]
         public async Task TEST_4_RemveCryptoGoods()
         {
-            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString);
+            TokenService.UserManager userManager = new TokenService.UserManager(mongoConnectionString, serviceEndpoint, partyid, blockchainNetworkid);
             string cryptoGoodID = Guid.NewGuid().ToString();
 
             //Adding...
-            var result = await userManager.PutCryptoGoodToLocker("bac0558f-f706-4465-acda-8eb701913032",
+            var result = await userManager.PutCryptoGoodToLocker(abtUserID,
             new Asset()
             {
                 ProductId = cryptoGoodID,
-                Name = "Air Jordan",
+                Name = "myDigitalGood",
                 TokenNumber = 0
             });
 
-            Console.WriteLine($"CryptoGood added with id : {cryptoGoodID}");
+            Console.WriteLine($"DigitalGood added with id : {cryptoGoodID}");
 
-            result = await userManager.RemoveCryptoGood("bac0558f-f706-4465-acda-8eb701913032", 0);
+            result = await userManager.RemoveCryptoGood(abtUserID, 0);
 
             Console.WriteLine($"CryptoGood id : {cryptoGoodID} has been removed");
 

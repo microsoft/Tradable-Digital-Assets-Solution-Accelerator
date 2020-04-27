@@ -1,4 +1,4 @@
-﻿using Contoso.DigitalGoods.TokenService.OffChain.ModelBase;
+﻿using Contoso.CryptoGoods.TokenService.OffChain.ModelBase;
 using System;
 
 namespace Microsoft.Azure.TokenService.Management.PersistentModel

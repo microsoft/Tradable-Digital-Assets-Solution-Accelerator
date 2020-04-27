@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.Service\Contoso.DigitalGoods.DigitalLocker.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.Test\Contoso.DigitalGoods.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>

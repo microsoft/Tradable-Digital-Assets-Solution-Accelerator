@@ -4,7 +4,7 @@
         <name>Contoso.DigitalGoods.Application.API</name>
     </assembly>
     <members>
-        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.CryptoGoodsGiftController.ResolveURLAndTransferGiftToken(System.String)">
+        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.DigitalGoodsGiftController.ResolveURLAndTransferGiftToken(System.String)">
             <summary>
             Get Encrypted URL and resolve information then Transfer token to User
             </summary>

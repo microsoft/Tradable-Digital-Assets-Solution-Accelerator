@@ -8,15 +8,14 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
 {
 
     /// <summary>
-    /// Contoso CryptoGoods Token API Service
+    /// Contoso DigitalGoods Token API Service
     /// </summary>
     //[Authorize]
-    [Route("CryptoGood/[controller]")]
+    [Route("DigitalGood/[controller]")]
     [ApiController]
     public class TokenServiceController : ControllerBase
     {
         private ITokenServiceAgent serviceAgent;
-        private IConfiguration configuration;
         //private string ContosoUserIdentifier;
 
         public TokenServiceController(IHttpContextAccessor httpContextAccessor, ITokenServiceAgent ServiceAgent, IConfiguration configuration)
@@ -35,10 +34,10 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <param name="TokenNumber">Token Number</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GiftCryptoGood")]
-        public async Task<bool> GiftCryptoGoods(string Recipient, long TokenNumber)
+        [Route("GiftDigitalGood")]
+        public async Task<bool> GiftDigitalGoods(string Recipient, long TokenNumber)
         {
-            return await serviceAgent.GiftCryptoGoods(Recipient, TokenNumber);
+            return await serviceAgent.GiftDigitalGoods(Recipient, TokenNumber);
         }
 
         /// <summary>
@@ -49,10 +48,10 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <param name="TokenNumber">Token Number</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("TransferCryptoGood")]
-        public async Task<bool> TransferCryptoGood(string Sender, string Recipient, long TokenNumber)
+        [Route("TransferDigitalGood")]
+        public async Task<bool> TransferDigitalGood(string Sender, string Recipient, long TokenNumber)
         {
-            return await serviceAgent.TransferCryptoGoods(Sender, Recipient, TokenNumber);
+            return await serviceAgent.TransferDigitalGoods(Sender, Recipient, TokenNumber);
         }
 
         /// <summary>
@@ -67,10 +66,5 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         {
             return await serviceAgent.IsitMyToken(TokenNumber, CallerID);
         }
-
-
-
-
-
     }
 }

@@ -1,17 +1,17 @@
-﻿using Contoso.DigitalGoods.DigitalGoodsGift.Service.Models;
+﻿using Contoso.DigitalGoods.CryptoGoodsGift.Service.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contoso.DigitalGoods.DigitalGoodsGift.Service.Interfaces
+namespace Contoso.DigitalGoods.CryptoGoodsGift.Service.Interfaces
 {
     public interface IGiftManager
     {
-        Task<CryptoGift> CreateCryptoGoodGift(string ReciverABTUserID, long TokenId);
+        Task<DigitalGift> CreateDigitalGoodGift(string ReciverABTUserID, long TokenId);
 
-        CryptoGift GetCryptoGoodGift(string GiftId);
+        DigitalGift GetDigitalGoodGift(string GiftId);
 
-        Task<CryptoGift> TransferCryptoGoodGiftToken(string GiftId);
+        Task<DigitalGift> TransferDigitalGoodGiftToken(string GiftId);
 
-        IEnumerable<CryptoGift> GetAllActiveCryptoGoodGifts();
+        IEnumerable<DigitalGift> GetAllActiveDigitalGoodGifts();
     }
 }

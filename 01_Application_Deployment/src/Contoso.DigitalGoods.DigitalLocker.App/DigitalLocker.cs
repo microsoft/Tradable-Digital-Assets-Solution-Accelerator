@@ -16,7 +16,7 @@ namespace Contoso.DigitalGoods.DigitalLocker.App
         public CryptoGoodLocker(IProductCatalogManager ProductCatalogManager, string TokenServiceURL)
         {
             //tokenServiceURL = TokenServiceURL;
-            tokenServiceClient = new Client(TokenServiceURL, new System.Net.Http.HttpClient());
+            tokenServiceClient = new Client(TokenServiceURL);
             productCatalogManager = ProductCatalogManager;
         }
 
@@ -24,7 +24,7 @@ namespace Contoso.DigitalGoods.DigitalLocker.App
         {
             try
             {
-                var assets = await tokenServiceClient.UsersAllAsync(ABTUserID);
+                var assets = await tokenServiceClient.GetUserDigitalKicsFromDigitalLockerAsync(ABTUserID);
                 if (assets.Count > 0)
                 {
                     List<DigitalLockerItem> items = new List<DigitalLockerItem>();
@@ -57,7 +57,7 @@ namespace Contoso.DigitalGoods.DigitalLocker.App
         {
             try
             {
-                var asset = await tokenServiceClient.TokensAsync(ABTUserID, TokenNumber);
+                var asset = await tokenServiceClient.GetDigitalGoodFromDigitalLockerAsync(ABTUserID, TokenNumber);
 
                 if (asset != null)
                 {

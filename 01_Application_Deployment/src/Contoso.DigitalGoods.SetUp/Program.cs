@@ -1,17 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using Contoso.DigitalGoods.SetUp.Interface;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using Microsoft.Azure.TokenService.Management;
-using Microsoft.Azure.Management.ResourceManager.Models;
-using Microsoft.Azure.TokenService.Management.Model;
 using System.Collections.Generic;
 using Contoso.DigitalGoods.TokenService.ServiceWrapper;
-using Microsoft.Azure.TokenService;
-using Microsoft.Azure.TokenService.Models;
+using Microsoft.Azure.TokenService.Proxy;
+using Contoso.DigitalGoods.TokenService;
+using Contoso.DigitalGoods.DigitalLocker.Service;
 
 namespace Contoso.DigitalGoods.SetUp
 {
@@ -30,114 +27,68 @@ namespace Contoso.DigitalGoods.SetUp
                                                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                                                .Build();
 
-            CryptoGoodsGetUp setup = new CryptoGoodsGetUp(_config);
+            DigitalGoodsGetUp setup = new DigitalGoodsGetUp(_config);
 
-            if (setup.ValidateRegistry().Result)
-            {
-                Console.WriteLine("\nStart to registering..........");
 
-                Console.WriteLine("\nRegistering group.....");
-                var group = setup.SetupGroup().Result;
-                Console.WriteLine(JsonConvert.SerializeObject(group));
+            Console.WriteLine("\nStart to registering..........");
 
-                Console.WriteLine("\nRegistering blockchian network.....");
-                var bcNetwork = setup.SetupBlockChainNetwork().Result;
-                Console.WriteLine(JsonConvert.SerializeObject(bcNetwork));
+            Console.WriteLine("\nRegistering group.....");
+            var party = setup.SetupParty().Result;
+            Console.WriteLine(JsonConvert.SerializeObject(party));
 
-                Console.WriteLine("\nRegistering ProductManager account.....");
-                var productManager_account = setup.SetupContosoProductManagerProfile().Result;
-                Console.WriteLine(JsonConvert.SerializeObject(productManager_account));
+            Console.WriteLine("\nRegistering blockchian network.....");
+            var bcNetwork = setup.SetupBlockChainNetwork().Result;
+            Console.WriteLine(JsonConvert.SerializeObject(bcNetwork));
 
-                Console.WriteLine("\nRegistering Contoto A account.......");
-                var contoso_accountA = setup.SetupContosoProfile().Result;
-                Console.WriteLine(JsonConvert.SerializeObject(contoso_accountA));
+            Console.WriteLine("\nRegistering ProductManager account.....");
+            var productManager_account = setup.SetupContosoProductManagerProfile(party.Id.ToString(), bcNetwork.Id.ToString()).Result;
+            Console.WriteLine(productManager_account);
 
-                Console.WriteLine("\nRegistering Contoto B account.......");
-                var contoso_accountB = setup.SetupContosoProfile().Result;
-                Console.WriteLine(JsonConvert.SerializeObject(contoso_accountB));
+            Console.WriteLine("\nRegistering Contoto account.......");
+            var contoso_account = setup.SetupContosoProfile("Contoso", party.Id.ToString(), bcNetwork.Id.ToString()).Result;
+            Console.WriteLine(contoso_account);
 
-                Console.WriteLine("\nInitialize Token");
-                var token = setup.InitializeToken(contoso_accountA.Name).Result;
-                Console.WriteLine(JsonConvert.SerializeObject(token));
+            Console.WriteLine("\nInitialize Token");
+            var token = setup.InitializeToken(productManager_account).Result;
+            Console.WriteLine(JsonConvert.SerializeObject(token));
 
-                Console.WriteLine("Registering process done. Update your configuration in Application and Token Services\n\n\n");
+            Console.WriteLine("Registering process done. Update your configuration in Application and Token Services\n\n\n");
 
-                Console.WriteLine("===================   Configuration Information  =====================");
-                Console.WriteLine($"TokenID : {token.Id.Replace("tokens.", "")}");
-                Console.WriteLine($"Contoso A ID : {contoso_accountA.Name}");
-                Console.WriteLine($"Contoso B ID : {contoso_accountB.Name}");
-                Console.WriteLine($"ContosoProductManager : {productManager_account.Name}");
-                Console.WriteLine($"GroupName : {group.Name}");
-                Console.WriteLine("======================================================================");
-            }
-            else
-            {
-                _ = setup.Clear().Result;
-                Console.WriteLine("Your registering process had something wrong. change configuration values and try again.\n\n\n");
-                Console.WriteLine("Cleaning resources.......\n");
+            Console.WriteLine("===================   Configuration Information  =====================");
+            Console.WriteLine($"TokenID : {token.ContractAddress}");
+            Console.WriteLine($"ContosoProductManager ID : {productManager_account}");
+            Console.WriteLine($"Contoso ID : {contoso_account}");
+            Console.WriteLine($"Party Id : {party.Id}");
+            Console.WriteLine($"Blockchain Id : {bcNetwork.Id}");
+            Console.WriteLine("======================================================================");
 
-            }
-            Console.WriteLine("==> Hit Enter to close.");
+            Console.WriteLine("==> Copy these values then Hit Enter to close.");
             Console.ReadLine();
         }
 
-        //private static void ReadDataFiles()
-        //{
-        //    string jsonProfile = File.ReadAllText(".\\Data\\profiles.json");
-        //    var profile = JsonConvert.DeserializeObject<Profiles>(jsonProfile);
-        //    var config = new MapperConfiguration(cfg =>
-        //    {
-        //        cfg.CreateMap<CryptoGoods.SetUp.Model.Profile, ContosoProfile>();
-        //    });
-
-        //    var mapper = config.CreateMapper();
-        //    profile.Profile.ForEach(x =>
-        //    {
-        //        var mappedProfile = mapper.Map<CryptoGoods.SetUp.Model.Profile, ContosoProfile>(x);
-        //        Console.WriteLine(mappedProfile.ContosoID);
-        //    });
-        //}
     }
 
-    class CryptoGoodsGetUp : ICryptoGoodsSetup
+    class DigitalGoodsGetUp
     {
         private IConfigurationRoot config;
-        public CryptoGoodsGetUp(IConfigurationRoot Config)
+        public DigitalGoodsGetUp(IConfigurationRoot Config)
         {
             this.config = Config;
         }
 
-        public async Task<bool> Clear()
-        {
-            //unregister blockchainnetwork
-            string _blockchainNetworkId = this.config["Settings:BlockchainNetworkId"];
-            BlockchainNetwork blockchainNetwork = new BlockchainNetwork();
-            await blockchainNetwork.UnRegisterAsync(_blockchainNetworkId);
-
-            //unregister group information
-            string _groupName = this.config["Settings:GroupName"];
-            GroupResource gr = new GroupResource();
-            await gr.UnRegisterAsync(_groupName);
-
-            //unregister product manager
-            string _productManager = $"{_groupName}ProductManager";
-            AccountResource ar = new AccountResource();
-            ar.GroupName = _groupName;
-            await ar.UnRegisterAsync(_productManager);
-
-            return true;
-        }
-
         public async Task<bool> ValidateRegistry()
         {
+            string serviceEndpoint = this.config["Settings:ServiceEndpoint"];
+
             List<string> messageBag = new List<string>();
             int exceptions = 0;
 
             //Check BlockchainNetworkID
             Console.WriteLine("Checking BlockchainNetworkID.................");
             string _blockchainNetworkId = this.config["Settings:BlockchainNetworkId"];
-            BlockchainNetwork blockchainNetwork = new BlockchainNetwork();
-            var bc_response = await blockchainNetwork.GetAsync(_blockchainNetworkId);
+
+            BlockchainNetworksClient bcClient = new BlockchainNetworksClient(serviceEndpoint);
+            var bc_response = await bcClient.BlockchainNetworkPostAsync(Guid.Parse(_blockchainNetworkId));
             if (bc_response != null)
             {
                 messageBag.Add($"\nThe BlockchainNetworkId : {_blockchainNetworkId} is already existed. try again with different ID");
@@ -145,24 +96,25 @@ namespace Contoso.DigitalGoods.SetUp
                 ++exceptions;
             }
 
-            //Check GroupName
-            Console.WriteLine("Checking GroupName..............");
-            string _groupName = this.config["Settings:GroupName"];
-            GroupResource gr = new GroupResource();
-            var gr_response = await gr.GetAsync(_groupName);
+            //Check Party
+            Console.WriteLine("Checking Party..............");
+            string _partyId = this.config["Settings:PartyId"];
+            PartiesClient partyClient = new PartiesClient(serviceEndpoint);
+
+            var gr_response = await partyClient.PartyPostAsync(Guid.Parse(_partyId));
             if (gr_response != null)
             {
-                messageBag.Add($"\nThis GroupName : {_groupName} is already existed. try again with different ID");
+                messageBag.Add($"\nThis PartyId : {_partyId} is already existed. try again with different ID");
                 Console.WriteLine(messageBag[exceptions]);
                 ++exceptions;
             }
 
             //Check ProductManager ID
             Console.WriteLine("Checking Product Manager........");
-            string _productManager = $"{_groupName}ProductManager";
-            AccountResource ar = new AccountResource();
-            ar.GroupName = _groupName;
-            var ar_response = ar.GetAsync(_productManager).Result;
+            string _productManager = this.config["Settings:ProductManagerId"];
+            UsersClient userClient = new UsersClient(serviceEndpoint);
+
+            var ar_response = await userClient.UserPostAsync(Guid.Parse(_productManager));
             if (ar_response != null)
             {
                 messageBag.Add($"\nThe Product Manager : {_productManager} is already existed.");
@@ -174,38 +126,32 @@ namespace Contoso.DigitalGoods.SetUp
 
         }
 
-        public async Task<GenericResource> SetupBlockChainNetwork()
+        public async Task<BlockchainNetwork> SetupBlockChainNetwork()
         {
-            string _blockchainNetworkId = this.config["Settings:BlockchainNetworkId"];
-            string _blockchainNetworkTxNode = this.config["Settings:BlockchainNetworkTxNode"];
-            string _blockchainNodeDescription = this.config["Settings:BlockchainNodeDescription"];
+            BlockchainNetworksClient bcClient = new BlockchainNetworksClient(config["Settings:ServiceEndpoint"]);
 
-            BlockchainNetwork blockchainNetwork = new BlockchainNetwork();
-
-            var result = await blockchainNetwork.RegisterOrUpdateAsync(new BlockchainNetworkRequestPropertyBag()
+            var result = await bcClient.BlockchainNetworkPostAsync(new BlockchainNetworkInfo()
             {
-                BlockchainNetworkId = _blockchainNetworkId,
-                blockchainNode = _blockchainNetworkTxNode,
-                description = _blockchainNodeDescription
+                Name = config["Settings:BlockchainNetworkName"],
+                Description = config["Settings:BlockchainNetworkDescription"],
+                NodeURL = config["Settings:BlockchainNetworkTxNode"]
             });
 
             return result;
         }
 
-        public Task SetupDigitalLocker()
+        public async Task<Party> SetupParty()
         {
-            throw new NotImplementedException();
-        }
+            string serviceEndpoint = config["Settings:ServiceEndpoint"];
+            string _partyName = config["Settings:PartyName"];
+            string _partyDescription = config["Settings:PartyDescription"];
 
-        public async Task<GenericResource> SetupGroup()
-        {
-            string _groupName = this.config["Settings:GroupName"];
-            string _groupDescription = this.config["Settings:GroupDescription"];
-            GroupResource gr = new GroupResource();
-            var result = await gr.RegisterOrUpdateAsync(new GroupRequestPropertyBag()
+            PartiesClient partyClient = new PartiesClient(serviceEndpoint);
+
+            var result = await partyClient.PartyPostAsync(new PartyInfo()
             {
-                GroupName = _groupName,
-                description = _groupDescription
+                PartyName = _partyName,
+                Description = _partyDescription
             });
 
             return result;
@@ -216,50 +162,38 @@ namespace Contoso.DigitalGoods.SetUp
             throw new NotImplementedException();
         }
 
-        public async Task<GenericResource> SetupContosoProductManagerProfile()
+        public async Task<string> SetupContosoProductManagerProfile(string PartyID, string BlockchainNetworkID)
         {
-            string _groupName = this.config["Settings:GroupName"];
-            string _blockchainNetworkId = this.config["Settings:BlockchainNetworkId"];
-            string _productManager = $"{_groupName}ProductManager";
+            UserManager userManager = new UserManager(config["DBConnections:TokenDBConnection"], 
+                config["Settings:ServiceEndpoint"],
+                PartyID,
+                BlockchainNetworkID);
 
-            AccountResource accountResource = new AccountResource();
-            accountResource.GroupName = _groupName;
-            var result = await accountResource.RegisterOrUpdateAsync(new AccountRequestPropertyBag()
-            {
-                AccountName = _productManager,
-                blockchainNetworkId = _blockchainNetworkId,
-                description = $"{_groupName} Product Manager"
-            });
-
+            var result = await userManager.ProvisionUser("Contoso ProductManager");        
             return result;
         }
 
-        public async Task<GenericResource> SetupContosoProfile()
+        public async Task<string> SetupContosoProfile(string UserName, string PartyID, string BlockchainNetworkID)
         {
-            string _groupName = this.config["Settings:GroupName"];
-            string _blockchainNetworkId = this.config["Settings:BlockchainNetworkId"];
-            string _contosoID = Guid.NewGuid().ToString();
+            UserManager userManager = new UserManager(config["DBConnections:TokenDBConnection"],
+              config["Settings:ServiceEndpoint"],
+              PartyID,
+              BlockchainNetworkID);
 
-            AccountResource accountResource = new AccountResource();
-            accountResource.GroupName = _groupName;
-            var result = await accountResource.RegisterOrUpdateAsync(new AccountRequestPropertyBag()
-            {
-                AccountName = _contosoID,
-                blockchainNetworkId = _blockchainNetworkId,
-                description = $"Contoso ID - {_contosoID}"
-            });
+            var result = await userManager.ProvisionUser(UserName);
 
+            DigitalLockerManager digitalLockerManager = new DigitalLockerManager(config["DBConnections:ApplicationDBConnection"], "DigitalLockers");
+            
+            var isProvisioned = await digitalLockerManager.ProvisionLocker(result);
+
+           
             return result;
         }
 
-        public async Task<AsyncResponse> InitializeToken(string productManager)
+        public async Task<TransactionReciept> InitializeToken(string productManagerAccount)
         {
-            //throw new NotImplementedException();
-            TokenAPIService tokenAPIConnection = new TokenAPIService();
-            AzureTokenServiceAPI api = tokenAPIConnection.Initialize();
-
-            TokenServiceWrapper svcWrapper = new TokenServiceWrapper(api);
-            return await svcWrapper.CreateToken("ContosoToken", "CTS", productManager);
+            TokenServiceWrapper svcWrapper = new TokenServiceWrapper(this.config["Settings:ServiceEndPoint"]);
+            return await svcWrapper.CreateToken("ContosoToken", "CTS", productManagerAccount);
         }
     }
 

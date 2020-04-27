@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Contoso.DigitalGoods.ProductCatalog.Service\Contoso.DigitalGoods.ProductCatalog.Service.csproj" />
     <ProjectReference Include="..\Contoso.DigitalGoods.TokenAPI.Proxy\Contoso.DigitalGoods.TokenAPI.Proxy.csproj" />
-    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
   </ItemGroup>
 
 </Project>

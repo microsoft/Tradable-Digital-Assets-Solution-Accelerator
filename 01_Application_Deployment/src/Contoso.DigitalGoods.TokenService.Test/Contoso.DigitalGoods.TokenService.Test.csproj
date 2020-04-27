@@ -14,14 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.Service\Contoso.DigitalGoods.DigitalLocker.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.Test\Contoso.DigitalGoods.Test.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.ServiceWrapper\Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj" />
     <ProjectReference Include="..\Contoso.DigitalGoods.TokenService\Contoso.DigitalGoods.TokenService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="application.settings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

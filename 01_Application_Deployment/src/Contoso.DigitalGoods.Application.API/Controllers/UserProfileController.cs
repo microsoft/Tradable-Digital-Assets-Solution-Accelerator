@@ -13,7 +13,7 @@ namespace Contoso.DigitalGoods.Application.API.Controllers
     /// User Profile Service API
     /// </summary>
     //[Authorize]
-    [Route("CryptoGoodsApp/User")]
+    [Route("DigitalGoodsApp/User")]
     [ApiController]
     public class UserProfileController : ControllerBase
     {

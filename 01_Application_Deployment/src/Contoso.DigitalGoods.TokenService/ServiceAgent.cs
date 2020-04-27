@@ -1,7 +1,7 @@
 ﻿using Contoso.DigitalGoods.DigitalLocker.Service.Models;
 using Contoso.DigitalGoods.TokenService.Interfaces;
 using Contoso.DigitalGoods.TokenService.Models;
-using Contoso.DigitalGoods.TokenService.ServiceWrapper.Messages;
+using Microsoft.Azure.TokenService.Proxy;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,14 +19,15 @@ namespace Contoso.DigitalGoods.TokenService
         //Should created
         private string contosoProductManager; //Token Owner
 
-        public ServiceAgent(string TokenID, string ContosoProductManager, string ContosoID, string GroupName ,string CosmosConnectionString)
+        public ServiceAgent(string TokenID, string ContosoProductManagerAccount, string ContosoAccount, 
+            string PartyId, string BlockchainNetworkId, string ServiceEndpoint, string CosmosConnectionString)
         {
-            tokenManager = new TokenManager(CosmosConnectionString, GroupName);
-            userManager = new UserManager(CosmosConnectionString);
+            tokenManager = new TokenManager(CosmosConnectionString, ServiceEndpoint);
+            userManager = new UserManager(CosmosConnectionString, ServiceEndpoint, PartyId, BlockchainNetworkId);
 
             tokenID = TokenID;
-            contosoID = ContosoID;
-            contosoProductManager = ContosoProductManager;
+            contosoID = ContosoAccount;
+            contosoProductManager = ContosoProductManagerAccount;
         }
 
         /// <summary>
@@ -40,12 +41,12 @@ namespace Contoso.DigitalGoods.TokenService
             return await userManager.ProvisionUser(ContosoUserIdentifier);
         }
 
-        public async Task<bool> GiftCryptoGoods(string Recipient, long TokenNumber)
+        public async Task<bool> GiftDigitalGoods(string Recipient, long TokenNumber)
         {
-            return await TransferCryptoGoods(contosoID, Recipient, TokenNumber);
+            return await TransferDigitalGoods(contosoID, Recipient, TokenNumber);
         }
 
-        public async Task<bool> TransferCryptoGoods(string Sender, string Recipient, long TokenNumber)
+        public async Task<bool> TransferDigitalGoods(string Sender, string Recipient, long TokenNumber)
         {
             //Transfer Token by Blockchain
             await tokenManager.TransferCryptoGoods(tokenID, TokenNumber, Sender, Sender, Recipient);
@@ -53,7 +54,7 @@ namespace Contoso.DigitalGoods.TokenService
             return await userManager.TransferAsset(Sender, Recipient, TokenNumber);
         }
 
-        public async Task<CryptoKickToken> MakeCryptoGoods(CryptoKickToken cryptoGoodToken)
+        public async Task<DigitalKickToken> MakeDigitalGoods(DigitalKickToken cryptoGoodToken)
         {
             //Mint Token by Blockchain
             var tokenInfo = await tokenManager.MintToken(tokenID, contosoProductManager, contosoID, cryptoGoodToken);
@@ -63,10 +64,10 @@ namespace Contoso.DigitalGoods.TokenService
             return tokenInfo;
         }
 
-        public async Task<CryptoKickToken> GetCryptoGoodfromToken(string ABTUserID, long TokenNumber)
+        public async Task<DigitalKickToken> GetDigitalGoodfromToken(string ABTUserID, long TokenNumber)
         {
             var tokenInfo = await tokenManager.GetCryptoGoodInfoFromToken(tokenID, ABTUserID, TokenNumber);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CryptoKickToken>(tokenInfo);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<DigitalKickToken>(tokenInfo);
         }
 
         public List<Asset> GetUserDigitalLocker(string ABTUserID)
@@ -74,7 +75,7 @@ namespace Contoso.DigitalGoods.TokenService
             return userManager.GetAllUserCryptoGoods(ABTUserID);
         }
 
-        public Asset GetCryptoGoodFromDigitalLocker(string ABTUserID, long TokenNumber)
+        public Asset GetDigitalGoodFromDigitalLocker(string ABTUserID, long TokenNumber)
         {
             return userManager.GetCryptoGoodFromUserLocker(ABTUserID, TokenNumber);
         }
@@ -84,12 +85,12 @@ namespace Contoso.DigitalGoods.TokenService
             return await tokenManager.CreateToken(TokenName, TokenSymbol, CallerID);
         }
 
-        public async Task<Account> GetAccountInfo(string ABTUserID)
+        public async Task<User> GetAccountInfo(string ABTUserID)
         {
             return await userManager.GetUserInfo(ABTUserID);
         }
 
-        public async Task<Account[]> GetAllAccounts()
+        public async Task<IEnumerable<User>> GetAllAccounts()
         {
             return await userManager.GetAllUsers();
         }

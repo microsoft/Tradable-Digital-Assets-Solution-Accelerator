@@ -3,8 +3,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- dev
-
+- master
+- PlanB
+- PlanB-DigitalGoods
 resources:
 - repo: self
 
@@ -19,7 +20,7 @@ variables:
   #dockerfilePath: '**/Dockerfile'
   
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'acrdigitalgoodse66f-auth'
+  imagePullSecret: 'acrcryptogoodse66f-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -53,7 +54,7 @@ stages:
         command: buildAndPush
         repository: $(imageRepository_token)
         buildContext : '$(Build.Repository.LocalPath)/src'
-        dockerfile: '$(Build.SourcesDirectory)/src/Contoso.DigitalGoods.Application.API/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/src/Contoso.DigitalGoods.TokenService.API/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)

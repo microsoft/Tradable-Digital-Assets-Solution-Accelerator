@@ -1,6 +1,6 @@
 using Contoso.DigitalGoods.ContosoProfile.Service;
-using Contoso.DigitalGoods.DigitalGoodsGift.Service;
-using Contoso.DigitalGoods.DigitalGoodsGift.Service.Interfaces;
+using Contoso.DigitalGoods.CryptoGoodsGift.Service;
+using Contoso.DigitalGoods.CryptoGoodsGift.Service.Interfaces;
 using Contoso.DigitalGoods.DigitalLocker.App;
 using Contoso.DigitalGoods.ProductCatalog.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -73,8 +73,8 @@ namespace Contoso.DigitalGoods.Application.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contoso CryptoGood's Application Service Endpoint", Version = "v1" });
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Contoso.DigitalGoods.Application.API.xml");
-                c.IncludeXmlComments(filePath);
+                //var filePath = Path.Combine(System.AppContext.BaseDirectory, "Contoso.CryptoGoods.Application.API.xml");
+                //c.IncludeXmlComments(filePath);
             });
             services.AddSwaggerGenNewtonsoftSupport();
 
@@ -84,7 +84,10 @@ namespace Contoso.DigitalGoods.Application.API
             {
                 return new ContosoProfileManager(Configuration["Values:offchain_connectionstring"],
                     Configuration["Values:profileCollectionName"],
-                    Configuration["Values:tokenAPIURL"]);
+                    Configuration["Values:tokenAPIURL"],
+                    Configuration["Values:PartyID"],
+                    Configuration["Values:BlockchainNetworkID"]
+                    );
 
             });
 
@@ -98,13 +101,17 @@ namespace Contoso.DigitalGoods.Application.API
 
             });
 
-            //Adding CryptoGift Manager
+            //Adding DigitalGift Manager
             services.AddTransient<IGiftManager, GiftManager>(c =>
             {
                 return new GiftManager(Configuration["Values:offchain_connectionstring"],
                     Configuration["Values:giftCollectionName"],
                     Configuration["Values:ContosoID"],
-                    Configuration["Values:tokenAPIURL"]);
+                    Configuration["Values:tokenAPIURL"],
+                    Configuration["Values:PartyID"],
+                    Configuration["Values:BlockchainNetworkID"]
+
+                    );
 
             });
 
@@ -127,7 +134,7 @@ namespace Contoso.DigitalGoods.Application.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -1,14 +1,14 @@
 ﻿using Contoso.DigitalGoods.TokenService.Interfaces;
 using Contoso.DigitalGoods.TokenService.Models;
-using Contoso.DigitalGoods.TokenService.ServiceWrapper.Messages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.TokenService.Proxy;
 using System.Threading.Tasks;
 
 namespace Contoso.DigitalGoods.TokenService.API.Controllers
 {
     //[Authorize]
-    [Route("CryptoGood/[controller]")]
+    [Route("DigitalGood/[controller]")]
     [ApiController]
     public class TokenManagementController : ControllerBase
     {
@@ -55,7 +55,7 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Users/{ABTUserID}")]
-        public async Task<Account> GetUserInfo(string ABTUserID)
+        public async Task<User> GetUserInfo(string ABTUserID)
         {
             return await serviceAgent.GetAccountInfo(ABTUserID);
         }
@@ -75,18 +75,18 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <summary>
         /// Mint Token to Contoso (Producing CryptoGood)
         /// </summary>
-        /// <param name="cryptoGood">CryptoGood Information</param>
+        /// <param name="digitalGood">CryptoGood Information</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("Inventories/Users/ProductManager/CryptoGoods/")]
-        public async Task<CryptoKickToken> MakeCryptoGood(CryptoKickToken cryptoGood)
+        [Route("Inventories/Users/ProductManager/DigitalGoods/")]
+        public async Task<DigitalKickToken> MakeDigitalGood(DigitalKickToken digitalGood)
         {
-            return await serviceAgent.MakeCryptoGoods(cryptoGood);
+            return await serviceAgent.MakeDigitalGoods(digitalGood);
         }
 
         //[HttpPost]
         //[Route("Management/Inventories/CryptoGoods/{CryptoGoodID}")]
-        //public async Task<CryptoKickToken> Foo(CryptoKickToken cryptoGood)
+        //public async Task<DigitalKickToken> Foo(DigitalKickToken cryptoGood)
         //{
         //    //return await serviceAgent.MakeCryptoGoods(cryptoGood);
         //}
@@ -98,10 +98,10 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <param name="TokenNumber">Token Number</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Inventories/Users/{ABTUserID}/CryptoGoods/{TokenNumber}")]
-        public async Task<CryptoKickToken> GetCryptoGoodFromToken(string ABTUserID, long TokenNumber)
+        [Route("Inventories/Users/{ABTUserID}/DigitalGoods/{TokenNumber}")]
+        public async Task<DigitalKickToken> GetDigitalGoodFromToken(string ABTUserID, long TokenNumber)
         {
-            return await serviceAgent.GetCryptoGoodfromToken(ABTUserID, TokenNumber);
+            return await serviceAgent.GetDigitalGoodfromToken(ABTUserID, TokenNumber);
         }
     }
 }

@@ -4,6 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>Contoso.DigitalGoods.SetUp.Program</StartupObject>
+    <AssemblyName>Contoso.DigitalGoods.SetUp</AssemblyName>
+    <RootNamespace>Contoso.DigitalGoods.SetUp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,17 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contoso.DigitalGoods.ContosoProfile.Service\Contoso.DigitalGoods.ContosoProfile.Service.csproj" />
-    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.ServiceWrapper\Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj" />
-    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TransactionIndexer\Contoso.DigitalGoods.TokenService.TokenTransactionIndexer.csproj" />
-    <ProjectReference Include="..\Microsoft.Azure.TokenService.Management\Microsoft.Azure.TokenService.Management.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.Service\Contoso.DigitalGoods.DigitalLocker.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService\Contoso.DigitalGoods.TokenService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\profiles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

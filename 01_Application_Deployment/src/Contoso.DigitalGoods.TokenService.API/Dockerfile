@@ -11,11 +11,10 @@ COPY ["Contoso.DigitalGoods.TokenService.API/Contoso.DigitalGoods.TokenService.A
 COPY ["Contoso.DigitalGoods.TokenService/Contoso.DigitalGoods.TokenService.csproj", "Contoso.DigitalGoods.TokenService/"]
 COPY ["Contoso.DigitalGoods.TokenService.TransactionIndexer/Contoso.DigitalGoods.TokenService.TokenTransactionIndexer.csproj", "Contoso.DigitalGoods.TokenService.TransactionIndexer/"]
 COPY ["Contoso.DigitalGoods.TokenService.OffChain/Contoso.DigitalGoods.OffChain.csproj", "Contoso.DigitalGoods.TokenService.OffChain/"]
+COPY ["Contoso.DigitalGoods.TokenService.TokenNumberManager/Contoso.DigitalGoods.TokenService.TokenNumberManager.csproj", "Contoso.DigitalGoods.TokenService.TokenNumberManager/"]
 COPY ["Contoso.DigitalGoods.TokenService.ServiceWrapper/Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj", "Contoso.DigitalGoods.TokenService.ServiceWrapper/"]
-COPY ["Microsoft.Azure.TokenService.Management/Microsoft.Azure.TokenService.Management.csproj", "Microsoft.Azure.TokenService.Management/"]
 COPY ["Microsoft.Azure.TokenService/Microsoft.Azure.TokenService.csproj", "Microsoft.Azure.TokenService/"]
 COPY ["Contoso.DigitalGoods.DigitalLocker.Service/Contoso.DigitalGoods.DigitalLocker.Service.csproj", "Contoso.DigitalGoods.DigitalLocker.Service/"]
-COPY ["Contoso.DigitalGoods.TokenService.TokenNumberManager/Contoso.DigitalGoods.TokenService.TokenNumberManager.csproj", "Contoso.DigitalGoods.TokenService.TokenNumberManager/"]
 RUN dotnet restore "Contoso.DigitalGoods.TokenService.API/Contoso.DigitalGoods.TokenService.API.csproj"
 COPY . .
 WORKDIR "/src/Contoso.DigitalGoods.TokenService.API"

@@ -1,68 +1,58 @@
+using Contoso.DigitalGoods.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MongoDB.Bson.IO;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
-using Contoso.DigitalGoods.ContosoProfile.Service;
 
 namespace Contoso.DigitalGoods.ContosoProfile.Service.Test
 {
     [TestClass]
-    public class ContosoProfileTest
+    public class ContosoProfileTest : TestBase
     {
-        private string mongoConnectionString;
-        private string tokenAPIURL;
-        private ContosoProfileManager _manager;
-        private string Contosoid;
-        private string abtUserID;
+        private static string mongoConnectionString;
+        private static string tokenAPIURL;
+        private static ContosoProfileManager _manager;
+        private static string Contosoid;
+        private static string abtUserID;
+
 
         [TestInitialize]
         public void InitTest()
         {
             //connstring should be removed
-            mongoConnectionString = "mongodb://cryptokick-app:PbUAtgv7QITNdy3fILD6s7CWVJYIzHXFDRpfYKhlNif1btbgwSX5ujbSq2ck9xNClucfMuoMWDrQOeg3jNQBlQ==@cryptokick-app.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
-            tokenAPIURL = "http://13.66.95.45";
+            mongoConnectionString = Config["Values:offchain_appconnectionstring"];
+            tokenAPIURL = Config["Values:ServiceEndpoint"];
 
             //userid need to be changed at your env.
-            Contosoid = Guid.NewGuid().ToString();
-            abtUserID = Guid.NewGuid().ToString();
-            _manager = new ContosoProfileManager(mongoConnectionString, "UserProfile", tokenAPIURL);
+            if (Contosoid == null)
+                Contosoid = Guid.NewGuid().ToString();
+            if (abtUserID == null)
+                abtUserID = Guid.NewGuid().ToString();
+            if (_manager == null)
+                _manager = new ContosoProfileManager(mongoConnectionString, "UserProfile", tokenAPIURL,Config["Values:PartyID"], Config["Values:BlockchainNetworkID"]);
         }
 
-        // [TestMethod]
-        // public async Task ProvisioningContosoProfile()
-        // {
-        //     var result =
-        //           await _manager.ProvisionContosoProfile(Contosoid);
-
-        //     Assert.IsInstanceOfType(result, typeof(Models.ContosoProfile));
-        //     _manager.DeleteProfile(Contosoid);
-        // }
-
+      
         [TestMethod]
-        public async Task ContosoProfileExsits()
+        public async Task Test0_ProvisioningContosoProfile()
         {
-            Contosoid = "DONTDELETE";
             var result =
                   await _manager.ProvisionContosoProfile(Contosoid);
-            Assert.IsNull(result);
+
+            Console.WriteLine($"User Profile : {Newtonsoft.Json.JsonConvert.SerializeObject(result)}");
+            Assert.IsInstanceOfType(result, typeof(Models.ContosoProfile));
         }
 
-
+     
         [TestMethod]
-        public void ContosoProfileDosentExsits()
+        public void Test1_GetContosoProfile()
         {
-            Contosoid = "DONTDELETE2";
-            var result =
-                   _manager.CheckForContosoDuplicates(Contosoid);
-            Assert.IsTrue(result);
-        }
-
-        [TestMethod]
-        public void GetContosoProfile()
-        {
-            Contosoid = "DONTDELETE";
             var CryptoGoods = _manager.GetUserProfileByContosoID(Contosoid);
 
             Assert.IsTrue(CryptoGoods.ContosoID == Contosoid);
+
+            //_manager.DeleteProfile(Contosoid);
         }
     }
 }

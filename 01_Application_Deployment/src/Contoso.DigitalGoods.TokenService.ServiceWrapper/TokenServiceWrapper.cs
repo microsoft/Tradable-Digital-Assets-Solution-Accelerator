@@ -1,5 +1,5 @@
 ﻿using Microsoft.Azure.TokenService;
-using Microsoft.Azure.TokenService.Models;
+using Microsoft.Azure.TokenService.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
 {
-    public class TokenServiceWrapper : TokenServiceWrapperBase, IERC20Compatible
+    public class TokenServiceWrapper 
     {
-        public TokenServiceWrapper(AzureTokenServiceAPI api) : base(api)
+        private NFmbtgTokenClient tokenServiceAPI;
+        public TokenServiceWrapper(string ServiceEndpoint)
         {
-
+            tokenServiceAPI = new NFmbtgTokenClient(ServiceEndpoint);
         }
 
         /// <summary>
@@ -21,28 +22,10 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="tokenSymbol"></param>
         /// <param name="CallerID"></param>
         /// <returns></returns>
-        public async Task<AsyncResponse> CreateToken(string tokenName, string tokenSymbol, string CallerID, string CallerGroupName = "Contoso")
+        public async Task<TransactionReciept> CreateToken(string tokenName, string tokenSymbol, string CallerID)
         {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            //Generating TokeName
-            if (this.tokenServiceAPI.TokenName == null) this.tokenServiceAPI.TokenName = Guid.NewGuid().ToString();
-
-            var request =
-                new ConstructorNFMBRGRequest
-                {
-                    CallerGroupName = CallerGroupName,
-                    CallerAccountName = CallerID,
-                    FunctionParams = new ConstructorNFMBRGRequestFunctionParams
-                    {
-                        Name = tokenName,
-                        Symbol = tokenSymbol
-                    },
-                    AdditionalMetaData = null,
-                    RequestId = Guid.NewGuid().ToString()
-                };
-
-            return await this.tokenServiceAPI.ConstructorNFMBRGAsync(request);
+            return await tokenServiceAPI.DeployNewTokenAsync(CallerID, tokenName, tokenSymbol);
+         
         }
 
         #region "ERC 20 Compatibles"
@@ -53,22 +36,15 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="TokenID"></param>
         /// <param name="CallerID"></param>
         /// <returns></returns>
-        public async Task<long?> GetBalance(string TokenID, string CallerID, string CallerGroupName = "Contoso")
+        public async Task<long> GetBalance(string TokenID, string CallerID)
         {
-            var request = new BalanceOfNFMBRGRequest()
-            {
-                CallerGroupName = CallerGroupName,
-                CallerAccountName = CallerID,
-                FunctionParams = new BalanceOfNFMBRGRequestFunctionParams()
-                {
-                    Owner = new AccountPartyType("Account", $"{CallerGroupName}.{CallerID}")
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
+            return await tokenServiceAPI.BalanceOfAsync(TokenID, CallerID);
+        }
 
-            tokenServiceAPI.TokenName = TokenID;
 
-            return (await tokenServiceAPI.BalanceOfNFMBRGAsync(request)).Output;
+        public async Task<string> WhoisOwner(string TokenID, string CallerID, long? TokenSequence)
+        {
+            return await tokenServiceAPI.OwnerOfAsync(TokenID, CallerID, TokenSequence);
         }
 
         /// <summary>
@@ -77,20 +53,9 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="TokenID"></param>
         /// <param name="CallerID"></param>
         /// <returns></returns>
-        public async Task<string> GetName(string TokenID, string CallerID, string CallerGroupName = "Contoso")
+        public async Task<string> GetName(string TokenID, string CallerID)
         {
-            var request = new NameNFMBRGRequest()
-            {
-                CallerAccountName = CallerID,
-                CallerGroupName = CallerGroupName,
-                FunctionParams = null,
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = TokenID;
-            var response = await tokenServiceAPI.NameNFMBRGAsync(request);
-
-            return response.Output;
+            return await tokenServiceAPI.NameAsync(TokenID, CallerID);
         }
 
         /// <summary>
@@ -99,27 +64,12 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="TokenID"></param>
         /// <param name="CallerID"></param>
         /// <returns></returns>
-        public async Task<string> GetSymbol(string TokenID, string CallerID, string CallerGroupName = "Contoso")
+        public async Task<string> GetSymbol(string TokenID, string CallerID)
         {
-            var request = new SymbolNFMBRGRequest()
-            {
-                CallerGroupName = CallerGroupName,
-                CallerAccountName = CallerID,
-                FunctionParams = new Dictionary<string, string>(),
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = TokenID;
-            var response = await tokenServiceAPI.SymbolNFMBRGAsync(request);
-
-            return response.Output;
+            return await tokenServiceAPI.SymbolAsync(TokenID, CallerID);
         }
 
-        public Task<long?> GetTotalSupply(string TokenID, string CallerID, string CallerGroupName = "Contoso")
-        {
-            //Doesn't make sense to Nonfungible token
-            throw new NotImplementedException();
-        }
+        
         #endregion
 
         /// <summary>
@@ -131,7 +81,7 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="metaDataString"></param>
         /// <param name="sequence"></param>
         /// <returns></returns>
-        public async Task<AsyncResponse> MintToken(string tokenID, string tokenCreator, string mintee, string metaDataString, long? sequence, string tokenCreatorGroupName = "Contoso")
+        public async Task<TransactionReciept> MintToken(string tokenID, string tokenCreator, string mintee, string metaDataString, long? sequence)
         {
             Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
 
@@ -139,52 +89,8 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
             //ar.GroupName = tokenCreatorGroupName;
             //var response = await ar.GetAsync(mintee);
 
-            var request = new MintWithTokenURINFMBRGRequest
-            {
-                CallerGroupName = tokenCreatorGroupName,
-                CallerAccountName = tokenCreator,
-                FunctionParams = new MintWithTokenURINFMBRGRequestFunctionParams()
-                {
-                    To = new AccountPartyType("Account", $"{tokenCreatorGroupName}.{mintee}"),
-                    TokenId = sequence, //What should be???
-                    TokenURI = metaDataString,
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.MintWithTokenURINFMBRGAsync(request);
-        }
-
-        /// <summary>
-        /// Check Specific user has minter role
-        /// </summary>
-        /// <param name="tokenID"></param>
-        /// <param name="callerID"></param>
-        /// <param name="ownerID"></param>
-        /// <returns></returns>
-        public async Task<IsMinterNFMBRGResponse> IsMinter(string tokenID, string callerID, string ownerID, string callerGroupName = "nike")
-        {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new IsMinterNFMBRGRequest
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = callerID,
-                FunctionParams = new IsMinterNFMBRGRequestFunctionParams
-                {
-                    Account = new AccountPartyType
-                    {
-                        Descriptor = "Account",
-                        Value = $"{callerGroupName}.{ownerID}"
-                    }
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.IsMinterNFMBRGAsync(request);
-
+        
+            return await tokenServiceAPI.MintTokenAsync(tokenID, tokenCreator, mintee, sequence, metaDataString);
         }
 
         /// <summary>
@@ -194,87 +100,13 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="caller"></param>
         /// <param name="sequence"></param>
         /// <returns></returns>
-        public async Task<TokenURINFMBRGResponse> GetTokenMetaData(string tokenID, string caller, long? sequence, string callerGroupName = "nike")
+        public async Task<string> GetTokenMetaData(string tokenID, string caller, long? sequence)
         {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new TokenURINFMBRGRequest
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = caller,
-                FunctionParams = new TokenURINFMBRGRequestFunctionParams()
-                {
-                    TokenId = sequence
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.TokenURINFMBRGAsync(request);
+            return await tokenServiceAPI.TokenURIAsync(tokenID, caller, sequence);
         }
 
-        /// <summary>
-        /// Adding Minter role by Token owner
-        /// </summary>
-        /// <param name="tokenID"></param>
-        /// <param name="caller"></param>
-        /// <param name="newMinter"></param>
-        /// <returns></returns>
-        public async Task<AsyncResponse> AddMinter(string tokenID, string caller, string newMinter, string callerGroupName = "nike")
-        {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new AddMinterNFMBRGRequest
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = caller,
-                FunctionParams = new AddMinterNFMBRGRequestFunctionParams()
-                {
-                    Account = new AccountPartyType
-                    {
-                        Descriptor = "Account",
-                        Value = $"{callerGroupName}.{newMinter}"
-                    }
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.AddMinterNFMBRGAsync(request);
-        }
-
-        /// <summary>
-        /// Giving Delegation
-        /// </summary>
-        /// <param name="tokenID"></param>
-        /// <param name="caller"></param>
-        /// <param name="allowerID"></param>
-        /// <returns></returns>
-        public async Task<AsyncResponse> SetApprovalForAll(string tokenID, string caller, string allowerID, string callerGroupName = "nike")
-        {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new SetApprovalForAllNFMBRGRequest()
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = caller,
-                FunctionParams = new SetApprovalForAllNFMBRGRequestFunctionParams()
-                {
-                    To = new AccountPartyType()
-                    {
-                        Descriptor = "Account",
-                        Value = $"{callerGroupName}.{allowerID}"
-                    },
-                    Approved = true
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.SetApprovalForAllNFMBRGAsync(request);
-        }
-
-        /// <summary>
+    
+             /// <summary>
         /// Transfer Token from User A to User B
         /// </summary>
         /// <param name="tokenID"></param>
@@ -283,25 +115,9 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public async Task<AsyncResponse> TranferToken(string tokenID, long? mintedTokenNumber, string callerID, string from, string to, string callerGroupName = "nike")
+        public async Task<TransactionReciept> TranferToken(string tokenID, long? mintedTokenNumber, string callerID, string from, string to)
         {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-            //TODO: uncomment this code
-            var request = new TransferFromNFMBRGRequest()
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = callerID,
-                FunctionParams = new TransferFromNFMBRGRequestFunctionParams()
-                {
-                    TokenId = mintedTokenNumber,
-                    FromProperty = new AccountPartyType("Account", $"{callerGroupName}.{from}"),
-                    To = new AccountPartyType("Account", $"{callerGroupName}.{to}")
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.TransferFromNFMBRGAsync(request);
+            return await tokenServiceAPI.TransferAsync(tokenID, from, to, mintedTokenNumber);
         }
 
         /// <summary>
@@ -311,41 +127,10 @@ namespace Contoso.DigitalGoods.TokenService.ServiceWrapper
         /// <param name="callerID"></param>
         /// <param name="mintedTokenNum"></param>
         /// <returns></returns>
-        public async Task<AsyncResponse> DeleteToken(string tokenID, string callerID, long? mintedTokenNum, string callerGroupName = "nike")
+        public async Task<TransactionReciept> DeleteToken(string tokenID, string callerID, long? mintedTokenNum)
         {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new BurnNFMBRGRequest()
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = callerID,
-                FunctionParams = new BurnNFMBRGRequestFunctionParams()
-                {
-                    TokenId = mintedTokenNum
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.BurnNFMBRGAsync(request);
+            return await tokenServiceAPI.BurnAsync(tokenID, callerID, mintedTokenNum);
         }
 
-        public async Task<OwnerOfNFMBRGResponse> IsItMyToken(string tokenID, string callerID, long? mintedTokenNum, string callerGroupName = "nike")
-        {
-            Debug.Assert(tokenServiceAPI != null, "Token Service API should be assigned before invoke it");
-
-            var request = new OwnerOfNFMBRGRequest()
-            {
-                CallerGroupName = callerGroupName,
-                CallerAccountName = callerID,
-                FunctionParams = new OwnerOfNFMBRGRequestFunctionParams()
-                {
-                    TokenId = mintedTokenNum
-                },
-                RequestId = Guid.NewGuid().ToString()
-            };
-            tokenServiceAPI.TokenName = tokenID;
-            return await tokenServiceAPI.OwnerOfNFMBRGAsync(request);
-        }
     }
 }

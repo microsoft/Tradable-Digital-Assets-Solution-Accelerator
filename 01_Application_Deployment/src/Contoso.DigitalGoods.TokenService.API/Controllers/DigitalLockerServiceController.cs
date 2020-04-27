@@ -1,5 +1,4 @@
-﻿
-using Contoso.DigitalGoods.DigitalLocker.Service.Models;
+﻿using Contoso.DigitalGoods.DigitalLocker.Service.Models;
 using Contoso.DigitalGoods.TokenService.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 namespace Contoso.DigitalGoods.TokenService.API.Controllers
 {
     //[Authorize]
-    [Route("CryptoGood/[controller]")]
+    [Route("DigitalGood/[controller]")]
     [ApiController]
     public class DigitalLockerServiceController : ControllerBase
     {
@@ -28,7 +27,7 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Users/{ABTUserID}")]
-        public List<Asset> GetUserCryptoKicsFromDigitalLocker(string ABTUserID)
+        public List<Asset> GetUserDigitalKicsFromDigitalLocker(string ABTUserID)
         {
             return serviceAgent.GetUserDigitalLocker(ABTUserID);
         }
@@ -41,9 +40,9 @@ namespace Contoso.DigitalGoods.TokenService.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Users/{ABTUserID}/Tokens/{TokenNumber}")]
-        public Asset GetCryptoGoodFromDigitalLocker(string ABTUserID, long TokenNumber)
+        public Asset GetDigitalGoodFromDigitalLocker(string ABTUserID, long TokenNumber)
         {
-            return serviceAgent.GetCryptoGoodFromDigitalLocker(ABTUserID, TokenNumber);
+            return serviceAgent.GetDigitalGoodFromDigitalLocker(ABTUserID, TokenNumber);
         }
 
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contoso.DigitalGoods.ContosoProfile.Service\Contoso.DigitalGoods.ContosoProfile.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.Test\Contoso.DigitalGoods.Test.csproj" />
     <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
   </ItemGroup>
 

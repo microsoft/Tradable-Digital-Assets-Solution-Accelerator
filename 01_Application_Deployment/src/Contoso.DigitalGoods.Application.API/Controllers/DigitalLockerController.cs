@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Contoso.DigitalGoods.Application.API.Controllers
 {
     //[Authorize]
-    [Route("CryptoGoodsApp/[controller]")]
+    [Route("DigitalGoodsApp/[controller]")]
     [ApiController]
     public class DigitalLockerController : ControllerBase
     {

@@ -1,6 +1,6 @@
 ﻿using Contoso.DigitalGoods.ContosoProfile.Service;
-using Contoso.DigitalGoods.DigitalGoodsGift.Service.Interfaces;
-using Contoso.DigitalGoods.DigitalGoodsGift.Service.Models;
+using Contoso.DigitalGoods.CryptoGoodsGift.Service.Interfaces;
+using Contoso.DigitalGoods.CryptoGoodsGift.Service.Models;
 using Contoso.DigitalGoods.OffChain;
 using Contoso.DigitalGoods.TokenAPI.Proxy;
 using Contoso.DigitalGoods.TokenService.OffChain.ModelBase;
@@ -8,33 +8,33 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Contoso.DigitalGoods.DigitalGoodsGift.Service
+namespace Contoso.DigitalGoods.CryptoGoodsGift.Service
 {
-    public class GiftManager : MongoEntntyCollectionBase<CryptoGift, Guid>, IGiftManager
+    public class GiftManager : MongoEntntyCollectionBase<DigitalGift, Guid>, IGiftManager
     {
         private string tokenServiceURL;
         private string ContosoABTUserId; //we don't need to have it.
         private ContosoProfileManager profileManager;
         //private string giftUrl = "https://CryptoGoods.com/gift/"; //should be in configuration file.
 
-        public GiftManager(string DataConnectionString, string CollectionName, string ContosoID, string TokenServiceURL) : base(DataConnectionString, CollectionName)
+        public GiftManager(string DataConnectionString, string CollectionName, string ContosoID, string TokenServiceURL, string PartyId, string BlockchainNetworkId) : base(DataConnectionString, CollectionName)
         {
             tokenServiceURL = TokenServiceURL;
             ContosoABTUserId = ContosoID;
-            profileManager = new ContosoProfileManager(DataConnectionString, "UserProfile", TokenServiceURL);
+            profileManager = new ContosoProfileManager(DataConnectionString, "UserProfile", TokenServiceURL, PartyId, BlockchainNetworkId);
         }
 
 
-        public async Task<CryptoGift> CreateCryptoGoodGift(string ReciverContosoUserID, long TokenId)
+        public async Task<DigitalGift> CreateDigitalGoodGift(string ReciverContosoUserID, long TokenId)
         {
             //Check not to creating duplicated Gift.
             var gift =
-                ObjectCollection.Find(new GenericSpecification<CryptoGift>(x => x.ReciverId == ReciverContosoUserID && x.TokenId == TokenId));
+                ObjectCollection.Find(new GenericSpecification<DigitalGift>(x => x.ReciverId == ReciverContosoUserID && x.TokenId == TokenId));
 
             //Once we have already created, just return null
             if (gift != null) return null;
 
-            var newCryptoGift = new CryptoGift()
+            var newCryptoGift = new DigitalGift()
             {
                 GiftId = Guid.NewGuid().ToString(),
                 TokenId = TokenId,
@@ -48,22 +48,22 @@ namespace Contoso.DigitalGoods.DigitalGoodsGift.Service
             return createCrptoGift;
         }
 
-        public CryptoGift GetCryptoGoodGift(string GiftId)
+        public DigitalGift GetDigitalGoodGift(string GiftId)
         {
-            var giftInfo = ObjectCollection.Find(new GenericSpecification<CryptoGift>(x => x.GiftId == GiftId));
+            var giftInfo = ObjectCollection.Find(new GenericSpecification<DigitalGift>(x => x.GiftId == GiftId));
 
             return giftInfo;
         }
 
-        public IEnumerable<CryptoGift> GetAllActiveCryptoGoodGifts()
+        public IEnumerable<DigitalGift> GetAllActiveDigitalGoodGifts()
         {
-            var giftInfos = ObjectCollection.FindAll(new GenericSpecification<CryptoGift>(x => x.Status == "active"));
+            var giftInfos = ObjectCollection.FindAll(new GenericSpecification<DigitalGift>(x => x.Status == "active"));
             return giftInfos;
         }
 
-        public async Task<CryptoGift> TransferCryptoGoodGiftToken(string GiftId)
+        public async Task<DigitalGift> TransferDigitalGoodGiftToken(string GiftId)
         {
-            CryptoGift info = GetCryptoGoodGift(GiftId);
+            DigitalGift info = GetDigitalGoodGift(GiftId);
 
             if (info.Status.ToLower() == "active")
             {
@@ -75,8 +75,11 @@ namespace Contoso.DigitalGoods.DigitalGoodsGift.Service
 
                 var userProfile = profileManager.GetUserProfileByContosoID(info.ReciverId);
 
-                Client _proxy = new Client(tokenServiceURL, new System.Net.Http.HttpClient());
-                var result = await _proxy.GiftCryptoGoodAsync(userProfile.ABTUserID, info.TokenId);
+                Client _proxy = new Client(tokenServiceURL);
+
+                
+
+                var result = await _proxy.GiftDigitalGoodsAsync(userProfile.ABTUserID, info.TokenId);
 
                 if (result)
                 {
@@ -90,7 +93,7 @@ namespace Contoso.DigitalGoods.DigitalGoodsGift.Service
             return info;
         }
 
-        public bool DeleteCryptoGift(CryptoGift GiftId)
+        public bool DeleteCryptoGift(DigitalGift GiftId)
         {
             ObjectCollection.Delete(GiftId);
             return true;

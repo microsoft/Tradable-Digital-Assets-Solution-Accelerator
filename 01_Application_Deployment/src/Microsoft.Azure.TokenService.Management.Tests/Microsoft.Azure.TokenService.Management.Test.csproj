@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -14,11 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Azure.TokenService.Management\Microsoft.Azure.TokenService.Management.csproj" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
+    <ProjectReference Include="..\Microsoft.Azure.TokenService\Microsoft.Azure.TokenService.csproj" />
   </ItemGroup>
 
 </Project>
