@@ -76,10 +76,8 @@ A sample of Docker File build a image are in each project [ApplicationApi](./src
 
 An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
 
-The Visual Studio Solution have a project Docker that create a image and launch in Web. Do you need have install Docker Desktop to run this project but you can take like reference to generate files in Azure DevOps.
 
 
-  ![Docker](./Local/DockerCompose.png)
 
 
 
@@ -97,7 +95,7 @@ This project contains a number of components described below.
 | Resource              | Usage                                                                                     |
 |-----------------------|-------------------------------------------------------------------------------------------|
 | Application Api  | Provide the Actions in the endpoint to manage users, catalogs and gifts        |
-| Blockchain Api  |Provide actions to manage Digital Locker, Token Managment and Communicate with Token Service|                                                     |
+| Token Api  | Manage the generation of Tokens for different actions for the application|                                                     |
 
 
  # Using the Application  
@@ -113,6 +111,10 @@ To use the services of this application we attach some [scripts](./Scripts.zip) 
   ![App Endpoints](../Reference/Apis/ApplicationApi.png)
 
 
-  # Blockchain Service Api
+  # _Microsoft Token Service Api_ Endpoints
 
-  ![Token Endpoints](../Reference/Apis/BlockchainApi.png)
+
+To use the services of this application we attach some [scripts](./Postman_B.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
+
+  ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_1.png)
+ ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_2.png)
