@@ -1,120 +1,28 @@
 # Application Deployment
 
-This source have been updated.
+After review the previous sections. You have a deployed resources in azure, a source code that now you know how to deploy and run in Visual Studio/Azure and Docker. You have how to access to the endpoints of Solution (Application and Blockchain Actions).
 
-After following all previous steps, you will have a resource group containing a pair of CosmosDB, a Storage Account,kev Vault, BlockChain Servie, Container and a Kubernetes cluster. The Kubernetes cluster will be hosting a our solution.
-
-There are a few modifications to the [Contoso.DigitalGoodsToken.sln](./src/./src/Contoso.DigitalGoodsToken.sln) that need to be made to work with your infrastructure. The connection strings of Cosmos DB and Key Vaults.
-
-<!-- To update the necessary appsettings.json connection strings, run the deploy.ps1 script. -->
+Now in this part you can learn and discover the endpoint of Microsoft Token Service that provide to Blockchain actions the logic to manage Tokens (Aprove, Deploy and Propierties), Service Managment (BlockChain Network, Parties, Users)
 
 ## Prerequisites
-1. Infrastructure deployed in the folder [00_Resource_Deployment](../00_Resource_Deployment)
-2. [Visual Studio](https://visualstudio.microsoft.com/)
-3. Updated connection strings
+1. [Postman](https://www.postman.com/)
+2. Updated scripts
 
-## Options to Run/Deploy our Code
+## How to Consume the endpoint?
 
-**1.- Local with visual Studio**
-
-# Steps
-1. Open [Contoso.DigitalGoodsToken.sln](./src/Contoso.DigitalGoodsToken.sln) in Visual Studio (as Admin)
-2. Build Project
-3. Run the **Contoso.DigitalGoods.Application.API** project or **Microsoft.Azure.TokenService** project to activate the different endpoints. In other case yo can configure the execution for both projects.
-
-In the Next images we have the specif steps to execute the solution:
-
-* Go to Properties of Solution.
-
-![1 ](./Local/1.png)
-
-* Select Multiple Starup and Select the projects Contoso.DigitalGood.Application.API and Contoso.Digital.TokenService.API.
-
-![2 ](./Local/2.png)
-
-* Run
-
-![3 ](./Local/3.png)
-
-* You can see two Browsers with a message 404. Yo need Modify and delete the word "weatherforecast" and replace by "swagger"
-
-![4 ](./Local/4.png)
-
-* You can see the operations avalilable and test with the scripts or consume in other way
-
-![6 ](./Local/6.png)
-
-![7 ](./Local/7.png)
-
-* You need configure the connections strings, secrets and configure JWT information for each project in the appsetting.json.
+Before to consume our [endpoint](http://52.137.97.182/swagger/index.html) we can review the actions.
 
 
-**2.- Create a Image and Deploy in our Container to Kubernates**
+# Token Actions
 
-Other option is build a image with  build of docker and deploy to the container and we have create a pipeline.
+  ![Token](./Token.png)
 
-This pipeline can you execute in automatic with azure devops or manually installing Docker and execute all in command line and helping with visual studio.
+  # Managment Actions 
 
-The steps by step have the next points:
+   ![Managment Service Actions](./ServiceMgn.png)
 
-* Build a Image (With a Docker build)
-* Push the Image to Container Registry
-* Publish the Artifact
-* Download the Artifact
-* Create a Image
-* Deploy Image to Kubernates
+Now when we see the actions we can test and consume the endpoint with the next step help us with Postman.
 
-In our case we need create this operation for our two services **Token.API** and  **Application.API**.
-
-In our project we have the files necesaries to create a pipeline.
-
-A sample of [pipeline](./azure-pipelines.yml) that we use in azure devops. 
-
-This file have dependencies the DockerFiles for each project:
-
-A sample of Docker File build a image are in each project [ApplicationApi](./src/Contoso.DigitalGoods.Application.API/Dockerfile) and [TokenApi](./src/Contoso.DigitalGoods.TokenService.API/Dockerfile)
-
-An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Components
-This project contains a number of components described below.
-
-| Resource              | Usage                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------|
-| Application Api  | Provide the Actions in the endpoint to manage users, catalogs and gifts        |
-| Token Api  | Manage the generation of Tokens for different actions for the application|                                                     |
-
-
- # Using the Application  
-
- 
- 
-
-  # _Application Api_ Endpoints
-
-
-To use the services of this application we attach some [scripts](./Scripts.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
-
-  ![App Endpoints](../Reference/Apis/ApplicationApi.png)
-
-
-  # _Microsoft Token Service Api_ Endpoints
-
-
-To use the services of this application we attach some [scripts](./Postman_B.zip) of sample to execute that operation in Postman. Each operation is specified in the next images.
-
-  ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_1.png)
- ![Token Endpoints](../Reference/Apis/Microsoft_Token_Service_API_Endpoint_2.png)
+1.- Open Postman
+2.- Go to the button Import and select the files .json
+()
