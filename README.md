@@ -12,6 +12,7 @@ In order to successfully complete your solution, you will need to have access to
 2. Visual Studio 2017 or 2019
 3. PowerShell
 4. Azure Cli
+5. Postman
 
 Optional
 1. Visual Studio Code
@@ -38,6 +39,9 @@ After deployed, you will have a Cosmos DB account and database, Azure storage, K
 
 ### [01- Application Deployment](./01_Application_Deployment)
 This folder contains the .net Solution that contains the API services that provide the funcionality to Sign up and Login to users, Catalog and Products and Gifts Manage like Digital Assets.
+
+### [02- Microsoft Token Service](./02_Microsoft_Token_Service)
+This folder contains the how to use and access to endpoint of Microsoft Token Service.
 
 ## Links
 Hosteds Site:
