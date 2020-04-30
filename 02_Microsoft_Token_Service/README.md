@@ -40,7 +40,7 @@ The steps by step have the next points:
 * Create a Image
 * Deploy Image to Kubernates
 
-In our case we need create this operation for our two services **Token.API** and  **Application.API**.
+In our case we need create this operation for our  services **Microsoft.TokenService.API**
 
 In our project we have the files necesaries to create a pipeline.
 
@@ -48,7 +48,8 @@ A sample of [pipeline](./azure-pipelines.yml) that we use in azure devops.
 
 This file have dependencies the DockerFiles for each project:
 
-A sample of Docker File build a image are in each project [ApplicationApi](./src/Contoso.DigitalGoods.Application.API/Dockerfile) and [TokenApi](./src/Contoso.DigitalGoods.TokenService.API/Dockerfile)
+A sample of Docker File build a image are in each project [Microsoft.TokenService.API](./src
+/Microsoft.TokenService.API/Dockerfile)
 
 An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
 
@@ -56,7 +57,7 @@ You can create a Docker Project like our Solution Digital Good to run with image
 
 ## How to consume the endpoint
 
-Before to consume our [endpoint](http://52.137.97.182/swagger/index.html) we can review the actions.
+Before to consume our [endpoint](http://51.143.111.232/swagger/index.html) we can review the actions.
 
 
 # Token Actions

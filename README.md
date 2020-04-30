@@ -49,7 +49,7 @@ Hosteds Site:
 
 * [BlockChain Service Api Endpoint](http://40.91.73.177/swagger/index.html), you can use scripts to consume the endpoints.
 
-* [Microsoft Token Service API Endpoint](http://52.137.97.182/swagger/index.html), you can use scripts to consume the endpoints.
+* [Microsoft Token Service API Endpoint](http://51.143.111.232/swagger/index.html), you can use scripts to consume the endpoints.
 
 ## License
 Copyright (c) Microsoft Corporation
