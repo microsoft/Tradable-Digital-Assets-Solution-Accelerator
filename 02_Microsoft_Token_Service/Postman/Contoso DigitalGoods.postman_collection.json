@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "DigitalGood App - UserProfile - Provisioning User by Nike Identifier",
+			"name": "DigitalGood App - UserProfile - Provisioning User by Contoso Identifier",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -26,7 +26,7 @@
 			"response": []
 		},
 		{
-			"name": "DigitalGood App - UserProfile - Get UserProfile by Nike Identifier",
+			"name": "DigitalGood App - UserProfile - Get UserProfile by Contoso Identifier",
 			"request": {
 				"method": "GET",
 				"header": [],
