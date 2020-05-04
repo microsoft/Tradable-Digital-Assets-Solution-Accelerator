@@ -67,14 +67,17 @@ namespace Microsoft.TokenService.KeyManagement
 
         public async Task<KeyBundle> SetKey(string keyIdentifier)
         {
-            return await kvClient.CreateKeyAsync(keyvaultUrl, keyIdentifier,
-                  new NewKeyParameters()
-                  {
-                      Kty = "EC",
-                      CurveName = "SECP256K1",
-                      KeySize = 2048,
-                      Tags = null
-                  });
+
+                return await kvClient.CreateKeyAsync(keyvaultUrl, keyIdentifier,
+              new NewKeyParameters()
+              {
+                  Kty = "EC",
+                  CurveName = "SECP256K1",
+                  KeySize = 2048,
+                  Tags = null
+              });
+
+
         }
 
         public async Task<string> GetPublicKey(string keyIdentifier)

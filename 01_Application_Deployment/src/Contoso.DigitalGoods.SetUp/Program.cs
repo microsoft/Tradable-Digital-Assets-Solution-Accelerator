@@ -27,7 +27,7 @@ namespace Contoso.DigitalGoods.SetUp
                                                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                                                .Build();
 
-            DigitalGoodsGetUp setup = new DigitalGoodsGetUp(_config);
+            DigitalGoodsSetUp setup = new DigitalGoodsSetUp(_config);
 
 
             Console.WriteLine("\nStart to registering..........");
@@ -68,10 +68,10 @@ namespace Contoso.DigitalGoods.SetUp
 
     }
 
-    class DigitalGoodsGetUp
+    class DigitalGoodsSetUp
     {
         private IConfigurationRoot config;
-        public DigitalGoodsGetUp(IConfigurationRoot Config)
+        public DigitalGoodsSetUp(IConfigurationRoot Config)
         {
             this.config = Config;
         }

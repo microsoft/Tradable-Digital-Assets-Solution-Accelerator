@@ -1,16 +1,16 @@
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
-  name: abtoptionbdgoods 
+  name: abtoptionbdigoods 
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: abtoptionbdgoods 
+        app: abtoptionbdigoods 
     spec:
       containers:
-        - name: abtoptionbdgoods 
-          image: acrcryptogoods.azurecr.io/abtoptionbdgoods
+        - name: abtoptionbdigoods 
+          image: contosodigitalgood.azurecr.io/abtoptionbdigoods
           ports:
           - containerPort: 80

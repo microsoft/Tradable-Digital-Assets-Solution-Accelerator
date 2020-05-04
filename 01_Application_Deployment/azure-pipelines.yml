@@ -3,8 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
-- PlanB
+
 - PlanB-DigitalGoods
 resources:
 - repo: self
@@ -12,15 +11,15 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '852278cd-210f-4a5e-9594-33c3eb82c2c6'
-  imageRepository_app: 'contosodigitalgoodsapp'
-  imageRepository_token: 'contosodigitalgoods'
-  containerRegistry: 'acrcryptogoods.azurecr.io'
+  dockerRegistryServiceConnection: 'contosodigitalgood'
+  imageRepository_app: 'contosodigitalgoodsapp-ne'
+  imageRepository_token: 'contosodigitalgoods-ne'
+  containerRegistry: 'contosodigitalgood.azurecr.io'
   
   #dockerfilePath: '**/Dockerfile'
   
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'acrcryptogoodse66f-auth'
+  imagePullSecret: 'contosodigitalgood-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'

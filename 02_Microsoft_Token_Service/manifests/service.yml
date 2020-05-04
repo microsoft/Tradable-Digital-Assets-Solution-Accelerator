@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: abtoptionbdgoods
+    name: abtoptionbdigoods
 spec:
     type: LoadBalancer
     ports:
     - port: 80 
     selector:
-        app: abtoptionbdgoods
+        app: abtoptionbdigoods

@@ -31,9 +31,9 @@ namespace Microsoft.TokenService.LedgerClient.Client
 
             users = new Users(connString, collectionName, config);
 
-            mapConfig = 
-                new MapperConfiguration(cfg => 
-                                                cfg.CreateMap<TransactionReceipt, 
+            mapConfig =
+                new MapperConfiguration(cfg =>
+                                                cfg.CreateMap<TransactionReceipt,
                                                               Model.TransactionReciept>()
                                                               .ForMember(dest => dest.TransactionHash, opt => opt.MapFrom(src => src.TransactionHash))
                                                               .ForMember(dest => dest.TransactionIndex, opt => opt.MapFrom(src => src.TransactionIndex.ToLong()))
@@ -61,17 +61,20 @@ namespace Microsoft.TokenService.LedgerClient.Client
 
         public async Task<TransactionReciept> DeployNewToken(string TokenOwnerId, string TokenName, string TokenSymbol)
         {
-            var receipt = await NFmbtgTokenService.DeployContractAndWaitForReceiptAsync(
-                                                await getWeb3WithUserID(TokenOwnerId),
-                                                new NFmbtgTokenDeployment()
-                                                {
-                                                    Name = TokenName,
-                                                    Symbol = TokenSymbol
-                                                });
-            
-            var mapper = mapConfig.CreateMapper();
-            return mapper.Map<TransactionReceipt, Model.TransactionReciept>(receipt);
-           
+                var receipt = await NFmbtgTokenService.DeployContractAndWaitForReceiptAsync(
+                                                    await getWeb3WithUserID(TokenOwnerId),
+                                                    new NFmbtgTokenDeployment()
+                                                    {
+                                                        Name = TokenName,
+                                                        Symbol = TokenSymbol
+                                                    });
+                var mapper = mapConfig.CreateMapper();
+                return mapper.Map<TransactionReceipt, Model.TransactionReciept>(receipt);
+       
+
+
+            return new TransactionReciept();
+
         }
 
         public async Task<string> Name(string ContractAddress, string CallerId)

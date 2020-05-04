@@ -11,12 +11,12 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '370e4f2e-8f9e-4377-8b7b-0d3f55856bf3'
-  imageRepository: 'abtoptionbdgoods'
-  containerRegistry: 'acrcryptogoods.azurecr.io'
+  dockerRegistryServiceConnection: 'contosodigitalgood'
+  imageRepository: 'abtoptionbdigoods'
+  containerRegistry: 'contosodigitalgood.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'acrcryptogoods6f10-auth'
+  imagePullSecret: 'contosodigitalgood6f10-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'

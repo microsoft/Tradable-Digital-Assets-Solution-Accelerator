@@ -20,10 +20,14 @@ Now in this part you can learn and discover the endpoint of Microsoft Token Serv
 * Select single start up for Microsoft.TokenService.API project
 
  ![Token](./Set.png)
+
 * In the webbrowser that Visual Studio Launch go to https://localhost:44386/swagger/index.html
 
 * You can view the actions and consume with the scripts.
-![Token](./url.png)
+
+![Token](./Url.png)
+
+Note: To Run the solution in Local Enviroment you need update the URL in ContosoSolution with the Microsoft Token Services Solution.
 
 ## How to Deploy the solution
 

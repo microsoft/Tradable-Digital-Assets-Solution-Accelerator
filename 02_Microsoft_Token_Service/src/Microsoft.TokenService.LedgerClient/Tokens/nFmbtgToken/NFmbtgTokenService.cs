@@ -18,6 +18,7 @@ namespace Microsoft.TokenService.LedgerClient.nFmbtgToken
     {
         public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, NFmbtgTokenDeployment nFmbtgTokenDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
+            
             return web3.Eth.GetContractDeploymentHandler<NFmbtgTokenDeployment>().SendRequestAndWaitForReceiptAsync(nFmbtgTokenDeployment, cancellationTokenSource);
         }
 

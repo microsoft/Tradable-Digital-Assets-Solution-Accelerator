@@ -45,11 +45,11 @@ This folder contains the how to use and access to endpoint of Microsoft Token Se
 
 ## Links
 Hosteds Site:
-* [Application Service Endpoint](http://40.91.114.29/swagger/index.html), you can use scripts to consume the endpoints.
+* [Application Service Endpoint]http://51.143.61.82/swagger/index.html), you can use scripts to consume the endpoints.
 
-* [BlockChain Service Api Endpoint](http://40.91.73.177/swagger/index.html), you can use scripts to consume the endpoints.
+* [BlockChain Service Api Endpoint](http://40.91.124.177/swagger/index.html), you can use scripts to consume the endpoints.
 
-* [Microsoft Token Service API Endpoint](http://51.143.111.232/swagger/index.html), you can use scripts to consume the endpoints.
+* [Microsoft Token Service API Endpoint](http://40.91.80.182/swagger/index.html), you can use scripts to consume the endpoints.
 
 ## License
 Copyright (c) Microsoft Corporation
