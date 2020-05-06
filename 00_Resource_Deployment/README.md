@@ -21,7 +21,7 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 As an alternative to running the PowerShell script, you can deploy the resources manually via the Azure Portal or click the button below to deploy the resources:
  
 
- <a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/blob/master/00_Resource_Deployment/" target="_blank">
+ <a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 

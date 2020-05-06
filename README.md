@@ -72,3 +72,7 @@ the rights to use your contribution. For details, visit https://cla.microsoft.co
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow 
+
+<a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
