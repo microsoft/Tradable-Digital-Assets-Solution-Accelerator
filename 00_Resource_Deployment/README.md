@@ -18,10 +18,10 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 2. Azure CLI Installed
 
 ## Deploy via Azure Portal
-As an alternative to running the PowerShell script, you can deploy the resources manually via the Azure Portal or click the button below to deploy the resources:
+As an alternative to deploy all resources manually via the Azure Portal or click the button below to deploy the resources with ARM template:
  
 
- <a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator" target="_blank">
+<a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
