@@ -27,15 +27,6 @@ As an alternative to running the PowerShell script, you can deploy the resources
 
 **Create Resources**
 
-<a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/blob/master/00_Resource_Deployment/00_DeployDigitalGoods.ps1" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
-
-**Create Secrets**
-
-<a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/blob/master/00_Resource_Deployment/01_DeploySecrets.ps1" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
 
 
 ## Steps for Resource Deployment via PowerShell
