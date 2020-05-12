@@ -27,26 +27,18 @@ As an alternative to deploy all resources manually via the Azure Portal or click
 
 **Create Resources**
 
-
+After this you need execute the  [Principal Script ](./02_DeployPrincipal.ps1) to create the principal and set in the vault.
 
 ## Steps for Resource Deployment via PowerShell
 
 To run the [PowerShell script](./00_DeployDigitalGoods.ps1):
 
 1. Modify the parameters at the top of **00_DeployDigitalGoods.ps1** to configure the names of your resources and other settings.   
-2. Run the [PowerShell script](./00_DeployDigitalGoods.ps1). If you have PowerShell opened to this folder run the command:
-`./00_DeployDigitalGoods.ps1`
-3. You will then be prompted to login and provide additional information.
+2. Run the [PowerShell script](./00_DeployDigitalGoods.ps1). 
+3. After this you need execute the  [Principal Script ](./02_DeployPrincipal.ps1) to create the principal and set in the vault.
+4. You will then be prompted to login and provide additional information.
 
-**Important:  For the 00_DeployDigitalGoods yo need Check the names and execute once you need be careful to choose the name of KeyVault**
+**Important:  For the you need Check the names and execute once you need be careful to choose the name of KeyVault**
 
 
-To run the [PowerShell script](./01_DeploySecrets.ps1):
-
-1. Modify the parameters at the top of **01_DeploySecrets.ps1** to configure the names of your resources and other settings.   
-2. Run the [PowerShell script](./01_DeploySecrets.ps1). If you have PowerShell opened to this folder run the command:
-`./01_DeploySecrets.ps1`
-3. You will then be prompted to login and provide additional information.
-
-**Important:  For the 01_DeploySecrets yo need put the same name of the KeyVault before configured and execute once, you can change the name of key and secret but not is recommendable**
 
