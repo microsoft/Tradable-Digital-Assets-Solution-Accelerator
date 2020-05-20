@@ -1,10 +1,12 @@
-$resourceGroupName = 'deployazure4bcatry'
-$location = 'CentralUS'
-$subscriptionID = 'dbd9230d-b929-45a9-99c3-f2c003d9c1b8'
-$kuberneteservice = 'digitalgoodscatry'
-$keyvaultname = 'contosodigitalvaultcatry'
+#this information need updated with you created with DeployAzure button. Hte "keyname" dont be changed.
+
+$resourceGroupName = ''
+$location = ''
+$subscriptionID = ''
+$kuberneteservice = ''
+$keyvaultname = ''
 $keyname = 'GiftEncKey'
-$secretvalue = 'np-3ADurkOSU0hn=@.MtGhnhQEVqqw17'
+$secretvalue = ''
 
 
 az login
