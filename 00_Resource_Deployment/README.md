@@ -19,13 +19,7 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 
 To deploy our resources we need execute the next steps.
 
-1.- Click on Button Deploy to Azure to create the resuources use the ARM template.
-
-2.- After this you need execute the  [Principal Script ](./01_DeployPrincipal.ps1) to create the principal and set in the vault.
-
-<a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
+1.- execute the  [Principal Script ](./01_DeployPrincipal.ps1) to create all resources you can Excecute in Commman Line PowerShell.
 
 
 
