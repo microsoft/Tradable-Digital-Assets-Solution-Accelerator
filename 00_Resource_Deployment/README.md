@@ -17,28 +17,18 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 1. Access to an Azure Subscription
 2. Azure CLI Installed
 
-## Deploy via Azure Portal
-As an alternative to deploy all resources manually via the Azure Portal or click the button below to deploy the resources with ARM template:
- 
+To deploy our resources we need execute the next steps.
+
+1.- Click on Button Deploy to Azure to create the resuources use the ARM template.
+
+2.- After this you need execute the  [Principal Script ](./01_DeployPrincipal.ps1) to create the principal and set in the vault.
 
 <a href="https://azuredeploy.net/?repository=https://github.com/microsoft/Tradable-Digital-Assets-Solution-Accelerator/" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
-**Create Resources**
 
-After this you need execute the  [Principal Script ](./02_DeployPrincipal.ps1) to create the principal and set in the vault.
 
-## Steps for Resource Deployment via PowerShell
-
-To run the [PowerShell script](./00_DeployDigitalGoods.ps1):
-
-1. Modify the parameters at the top of **00_DeployDigitalGoods.ps1** to configure the names of your resources and other settings.   
-2. Run the [PowerShell script](./00_DeployDigitalGoods.ps1). 
-3. After this you need execute the  [Principal Script ](./02_DeployPrincipal.ps1) to create the principal and set in the vault.
-4. You will then be prompted to login and provide additional information.
-
-**Important:  For the you need Check the names and execute once you need be careful to choose the name of KeyVault**
 
 
 
