@@ -1,33 +1,33 @@
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
-  name: contosodigitalgoods-ne 
+  name: contosodigitalgoods
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: contosodigitalgoods-ne 
+        app: contosodigitalgoods
     spec:
       containers:
-        - name: contosodigitalgoods-ne 
-          image: contosodigitalgood.azurecr.io/contosodigitalgoods-ne
+        - name: contosodigitalgoods
+          image: contosodigitalgood.azurecr.io/contosodigitalgoods
           ports:
           - containerPort: 80
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: contosodigitalgoodsapp-ne
+  name: contosodigitalgoodsapp
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: contosodigitalgoodsapp-ne
+        app: contosodigitalgoodsapp
     spec:
       containers:
-        - name: contosodigitalgoodsapp-ne
-          image: contosodigitalgood.azurecr.io/contosodigitalgoodsapp-ne
+        - name: contosodigitalgoodsapp
+          image: contosodigitalgood.azurecr.io/contosodigitalgoodsapp
           ports:
             - containerPort: 80
