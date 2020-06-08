@@ -1,0 +1,31 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: abtoptionb
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: abtoptionb
+  template:
+    metadata:
+      labels:
+        app: abtoptionb
+    spec:
+      containers:
+        - name: abtoptionb
+          image: {acrname}.azurecr.io/microsoft/tokenservice/apiservice
+          ports:
+          - containerPort: 80
+            name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: abtoptionb
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80 
+    selector:
+        app: abtoptionb

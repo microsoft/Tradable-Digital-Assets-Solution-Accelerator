@@ -1,0 +1,33 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Values": {
+    "offchain_connectionstring": "{connectionstring}",
+    "tokenAPIURL": "http://contosodigitalgoods",
+    "profileCollectionName": "UserProfile",
+    "giftCollectionName": "CryptoGifts",
+    "productCatalogCollectionName": "ProductCatalog",
+    "ContosoID": "{Update it from Setup Application}",
+    "GiftURL": "http://{contosoappuri}/DigitalGoodsApp/Gifts/",
+    "PartyID": "{Update it from Setupup Application}",
+    "BlockchainNetworkID": "{Update it from Setup Application}"
+
+  },
+  "Encryption": {
+    "KeyStorage": "{keyfilesas}",
+    "KeyIdentifier": "{keyversion}",
+    "ClientID": "{serviceprincipleid}",
+    "ClientSecret": "{serviceprinciplesecret}"
+  },
+  "JwtToken": {
+    "Issuer": "http://Contoso.com",
+    "Audience": "com.Contoso.brand.CryptoGoods.web",
+    "SecretKey": ""
+  }
+}
