@@ -48,23 +48,23 @@ namespace Contoso.DigitalGoods.Application.API
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
-            services.AddAuthentication(option =>
-            {
-                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = false,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["JwtToken:Issuer"],
-                    ValidAudience = Configuration["JwtToken:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtToken:SecretKey"]))
-                };
-            });
+            // services.AddAuthentication(option =>
+            // {
+            //     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // }).AddJwtBearer(options =>
+            // {
+            //     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+            //     {
+            //         ValidateIssuer = true,
+            //         ValidateAudience = true,
+            //         ValidateLifetime = false,
+            //         ValidateIssuerSigningKey = true,
+            //         ValidIssuer = Configuration["JwtToken:Issuer"],
+            //         ValidAudience = Configuration["JwtToken:Audience"],
+            //         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtToken:SecretKey"]))
+            //     };
+            // });
 
             //adding HTTPContext
             services.AddHttpContextAccessor();
@@ -138,7 +138,7 @@ namespace Contoso.DigitalGoods.Application.API
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            // app.UseAuthentication();
 
             app.UseAuthorization();
 
