@@ -32,15 +32,13 @@ Follow the next points.
 4. In the Prompt run the the File .BAT and wait to 
 finish.
 
-![S](./Reference/S.png)
+![S](./References/S.png)
 
-![F](./Reference/S.png)
+![F](./References/S.png)
 
 5. The execution of this file invokes the Api´s Deploy Building a image with Docker and Push the image to the Container Registry in Azure and Configure in K8s service.
 
 ## How to Run Locally you Solution
-
-**1.- Local with visual Studio**
 
 # Steps
 1. Open [Contoso.DigitalGoodsToken.sln](./src/Contoso.DigitalGoodsToken.sln) in Visual Studio (as Admin)
