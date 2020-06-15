@@ -4,7 +4,7 @@
 ## About this repository
 This accelerator was built to provide developers with all of the resources needed to quickly build an  Tradable Digital Assets Solution. All below BlockChain paradigm and technology (Tokens, Gifts etc...). This is a fist step that contain manage users, login, catalogs, products and gifts Use this accelerator to jump start your development efforts with Blockchain, Cosmos DB and Azure.
 
-This repository contains the steps, scripts, code, references and tools to create a  blockchain application. 00_Resource_Deployment will create the necessary supporting resources in Azure (Storage, Kubernetes, Key Vault and Cosmos DB). 01_Application_Deployment will deploy and host your application either locally or in your subscription. Refence contains some diagrams about the architecture and procces that execute this solution.
+This repository contains the steps, scripts, code, references and tools to create a  blockchain application. 00_Resource_Deployment will create the necessary supporting resources in Azure (Storage, Kubernetes Sevice, Blockchain Sevice, Key Vault and Cosmos DB). 01_Application_Deployment will deploy and host your application either locally or in your subscription. Reference contains some diagrams about the architecture and procces that execute this solution.
 
 ## Prerequisites
 In order to successfully complete your solution, you will need to have access to and or provisioned the following:
@@ -33,12 +33,16 @@ Clone/download this repo onto your computer and then walk through each of these 
 
 
 ### [00 - Resource Deployment](./00_Resource_Deployment)
-The resources in this folder can be used to deploy the required resources into your Azure Subscription. This can be done either via the [Azure Portal](https://portal.azure.com) or by using the [PowerShell scripts](./00_Resource_Deployment/00_DeployDigitalGoods.ps1 , ./00_Resource_Deployment/01_DeploySecrets.ps1) included in the resource deployment folder.
+The resources in this folder can be used to deploy the required resources into your Azure Subscription. This can be done using the [PowerShell script](./00_Resource_Deployment/DeployResources1.ps1) included in the resource deployment folder.
 
-After deployed, you will have a Cosmos DB account and database, Azure storage, KeyVault, BlockChainService and Kubernetes cluster deployed in your specified resource group.
+After deployed, you will have a Cosmos DB account and database, Azure storage, KeyVault, BlockChainService and Kubernetes cluster deployed in your specified resource group also you have the configuration of Principal Identities and Files that you need in the storage.
 
 ### [01- Application Deployment](./01_Application_Deployment)
-This folder contains the .net Solution that contains the API services that provide the funcionality to Sign up and Login to users, Catalog and Products and Gifts Manage like Digital Assets.
+
+This folder contains the .net Solution that contains the API services that provide the funcionality to Sign up and Login to users, Catalog and Products and Gifts Manage like Digital Assets. 
+
+Also containt the PowerShell Script to deploy Services of Solution to our Resources created in the Folder 
+[**00 - Resource Deployment**](./00_Resource_Deployment).
 
 ### [02- Microsoft Token Service](./02_Microsoft_Token_Service)
 This folder contains the how to use and access to endpoint of Microsoft Token Service.

@@ -56,7 +56,7 @@ az cosmosdb create `
 
 
 Write-Host "Creating CosmosDB for Application - $azurecosmosaccountapp" -ForegroundColor Yellow
-# Create a MongoDB API Cosmos DB account 
+# Create a MongoDB API Cosmos DB account
 az cosmosdb create `
 --resource-group $resourceGroupName `
 --name $azurecosmosaccountapp `
@@ -66,7 +66,7 @@ az cosmosdb create `
 --subscription $subscriptionID
 
 Write-Host "Creating CosmosDB for ABT Token Service - $azurecosmosMicrosofttokensvc" -ForegroundColor Yellow
-# Create a MongoDB API Cosmos DB account 
+# Create a MongoDB API Cosmos DB account
 az cosmosdb create `
 --resource-group $resourceGroupName `
 --name $azurecosmosMicrosofttokensvc `
@@ -76,7 +76,7 @@ az cosmosdb create `
 --subscription $subscriptionID
 
 Write-Host "Creating Storage Account - $storageAccountName" -ForegroundColor Yellow
-# Create a Storage  account 
+# Create a Storage  account
 az storage account create `
     --location $location `
     --name $storageAccountName `
@@ -107,7 +107,7 @@ $spResult = az ad sp create-for-rbac --skip-assignment --name "contosoretailsp$s
 $appid = ($spResult | ConvertFrom-Json).appId
 $serviceprinciplesecret = ($spResult | ConvertFrom-Json).password
 
-# Create a Container Registry   
+# Create a Container Registry
 Write-Host "Create Container Registry - $containerregistry" -ForegroundColor Yellow
 az acr create --name $containerregistry `
                 --resource-group $resourceGroupName `
@@ -126,7 +126,8 @@ az aks create --name $kuberneteservice `
     --node-count 1 `
     --service-principal "$appid" `
     --client-secret "$serviceprinciplesecret" `
-    --generate-ssh-keys 
+    --generate-ssh-keys
+
 
 # Get Container Registry Resource ID
 $registryRole = az acr show `
@@ -139,12 +140,12 @@ $registryRole = az acr show `
 az role assignment create --assignee $appid --role Reader --scope $registryRole
 
 Write-Host "Creating KeyVault - $keyvaultname" -ForegroundColor Yellow
-# Create a Key Vault  
+# Create a Key Vault
 az keyvault create --name $keyvaultname --resource-group $resourceGroupName --location $location --subscription $subscriptionID
 
 Write-Host "Create the key - $keyvaultname" -ForegroundColor Yellow
 # Create Key
-az keyvault key create --name $keyname --vault-name $keyvaultname 
+az keyvault key create --name $keyname --vault-name $keyvaultname
 
 Write-Host "Set Keyvault Policy to Service Principle" -ForegroundColor Yellow
 # Update Key Vault Policy to accept Service Principal request
@@ -154,7 +155,7 @@ az keyvault set-policy --name $keyvaultname --spn $appId `
     --secret-permissions backup delete get list purge recover restore set
 
 Write-Host "Deploy Blockhchain network - $azureblockchaineservice" -ForegroundColor Yellow
-# Create a member  
+# Create a member
 az resource create --resource-group $resourceGroupName `
 --name $azureblockchaineservice `
 --resource-type Microsoft.Blockchain/blockchainMembers `
@@ -194,7 +195,7 @@ Write-Host "Update Token service connectionstring to DigitalGoods Token Service 
 Write-Host "Update Token service connectionstring to DigitalGoods Setup App" -ForegroundColor Yellow
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.SetUp\appsettings.json -Raw) `
                 -replace '{tokensvcconnectionstring}', $connectionStringsvc) `
-                | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.SetUp\appsettings.json 
+                | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.SetUp\appsettings.json
 
 Write-Host "Get Cosmos DB for Microsoft Azure Token Service connectionstring" -ForegroundColor Yellow
 $connectionStringabt  = az cosmosdb keys list `
@@ -217,32 +218,32 @@ $keyFileSaS = az storage blob generate-sas `
                                     -n $keyfilename `
                                     --full-uri
 
-Write-Host "Update Keyfile's Url to DigitalGoods Application API" -ForegroundColor Yellow                                    
+Write-Host "Update Keyfile's Url to DigitalGoods Application API" -ForegroundColor Yellow
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json -Raw) `
                 -replace '{keyfilesas}', $keyFileSaS.Replace('"','')) `
                 | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json
 
-Write-Host "Get Key with version uri from Azure Keyvault" -ForegroundColor Yellow                                                    
+Write-Host "Get Key with version uri from Azure Keyvault" -ForegroundColor Yellow
 # Update Key version from Keyvault
 $keyversion = az keyvault key list-versions -n $keyname --vault-name $keyvaultname --query [].kid -o tsv
 
-Write-Host "Update Key with version uri to DigitalGoods Application API" -ForegroundColor Yellow                                                    
+Write-Host "Update Key with version uri to DigitalGoods Application API" -ForegroundColor Yellow
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json -Raw) `
                 -replace '{keyversion}', $keyversion) `
                 | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json
 
-Write-Host "Get Keyvault uri from Azure Keyvault" -ForegroundColor Yellow                 
+Write-Host "Get Keyvault uri from Azure Keyvault" -ForegroundColor Yellow
 # Update Keyvault Uri
 $keyvaulturi = az keyvault list -g $resourceGroupName --query [0].properties.vaultUri -o tsv
 
-Write-Host "Update Keyvault uri to Microsoft Azure Token service API" -ForegroundColor Yellow                 
+Write-Host "Update Keyvault uri to Microsoft Azure Token service API" -ForegroundColor Yellow
 ((Get-Content -path .\02_Microsoft_Token_Service\src\Microsoft.TokenService.API\appsettings.json -Raw) `
 -replace '{keyvaulturi}', $keyvaulturi) `
 | Set-Content -Path .\02_Microsoft_Token_Service\src\Microsoft.TokenService.API\appsettings.json
 
-Write-Host "Update Serviceprinciple informations(ip / secret) to applications" -ForegroundColor Yellow                 
+Write-Host "Update Serviceprinciple informations(ip / secret) to applications" -ForegroundColor Yellow
 
-Write-Host "Update to DigitalGoods App API" -ForegroundColor Yellow                 
+Write-Host "Update to DigitalGoods App API" -ForegroundColor Yellow
 # Update serviceprinciple id
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json -Raw) `
 -replace '{serviceprincipleid}', $appid) `
@@ -253,7 +254,7 @@ Write-Host "Update to DigitalGoods App API" -ForegroundColor Yellow
 -replace '{serviceprinciplesecret}', $serviceprinciplesecret) `
 | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.Application.API\appsettings.json
 
-Write-Host "Update to DigitalGoods token service API" -ForegroundColor Yellow                 
+Write-Host "Update to DigitalGoods token service API" -ForegroundColor Yellow
 # Update serviceprinciple id
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.TokenService.API\appsettings.json -Raw) `
 -replace '{serviceprincipleid}', $appid) `
@@ -264,7 +265,7 @@ Write-Host "Update to DigitalGoods token service API" -ForegroundColor Yellow
 -replace '{serviceprinciplesecret}', $serviceprinciplesecret) `
 | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.TokenService.API\appsettings.json
 
-Write-Host "Update to Microsoft Azure token service API" -ForegroundColor Yellow 
+Write-Host "Update to Microsoft Azure token service API" -ForegroundColor Yellow
 # Update serviceprinciple id
 ((Get-Content -path .\02_Microsoft_Token_Service\src\Microsoft.TokenService.API\appsettings.json -Raw) `
 -replace '{serviceprincipleid}', $appid) `
@@ -276,7 +277,7 @@ Write-Host "Update to Microsoft Azure token service API" -ForegroundColor Yellow
 | Set-Content -Path .\02_Microsoft_Token_Service\src\Microsoft.TokenService.API\appsettings.json
 
 
-Write-Host "Build and push, Deploy Microsoft Azure Token Service" -ForegroundColor Yellow 
+Write-Host "Build and push, Deploy Microsoft Azure Token Service" -ForegroundColor Yellow
 ##Build and push images for ABT Service
 Set-Location .\02_Microsoft_Token_Service\src
 
@@ -285,7 +286,7 @@ docker tag 'microsoft/tokenservice/apiservice' "$containerregistry.azurecr.io/mi
 
 az acr update -n $containerregistry --admin-enabled
 
-$password = ( az acr credential show --name $containerregistry | ConvertFrom-Json).passwords.value.Split(" ")[1] 
+$password = ( az acr credential show --name $containerregistry | ConvertFrom-Json).passwords.value.Split(" ")[1]
 
 
 
@@ -378,7 +379,7 @@ Write-Host "Update Token Service URL to DigitalGoods Setup App" -ForegroundColor
                 -replace '{tokenserviceendpoint}', $publicEndpoint) `
                 | Set-Content -Path .\01_Application_Deployment\src\Contoso.DigitalGoods.SetUp\appsettings.json
 
-Write-Host "Get Blockchain connection string" -ForegroundColor Yellow                
+Write-Host "Get Blockchain connection string" -ForegroundColor Yellow
 #Get Blockchain TxNode ConnectionString
 $blockhcainkey = az resource invoke-action `
                     --resource-group $resourceGroupName `
@@ -391,7 +392,7 @@ $blockhcainkey = az resource invoke-action `
 $blockchainDNS = az resource show -g $resourceGroupName -n $azureblockchaineservice --resource-type Microsoft.Blockchain/blockchainMembers --query properties.dns -o tsv
 $transactionNodeUrl = "https://$blockchainDNS`:3200/$blockhcainkey"
 
-Write-Host "Update Blockchain connection string to DigitalGoods Setup" -ForegroundColor Yellow    
+Write-Host "Update Blockchain connection string to DigitalGoods Setup" -ForegroundColor Yellow
 
 ((Get-Content -path .\01_Application_Deployment\src\Contoso.DigitalGoods.SetUp\appsettings.json -Raw) `
                 -replace '{transactionNodeUri}', $transactionNodeUrl) `

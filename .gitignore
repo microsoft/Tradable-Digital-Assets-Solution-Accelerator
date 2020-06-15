@@ -353,3 +353,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/01_Application_Deployment/src/Contoso.DigitalGoods.TokenService.API/appsettings.json
+/01_Application_Deployment/src/Contoso.DigitalGoods.SetUp/appsettings.json
+/01_Application_Deployment/src/Contoso.DigitalGoods.Application.API/appsettings.json
+/01_Application_Deployment/deployTokenService.yml
+/01_Application_Deployment/DeployResources2.ps1
+/01_Application_Deployment/deployApp.yml
+/02_Microsoft_Token_Service/src/Microsoft.TokenService.API/appsettings.json
+/02_Microsoft_Token_Service/deployABT.yml
+/keys.xml

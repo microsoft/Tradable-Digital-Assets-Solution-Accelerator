@@ -19,8 +19,25 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 
 To deploy our resources we need execute the next steps.
 
-1.- execute the  [Principal Script ](./01_DeployPrincipal.ps1) to create all resources you can Excecute in Commman Line PowerShell.
+1.- Open the file [deploy1.bat](../deploy1.bat) with a text editor and change the parameters if you wish. The unique parameter that you need change is the subscriptionId, this is the Id of your subscription of Azure that you have permission to create resources
+This BAT file execute the ps1 File located in the **00_Resource_Deployment**.
 
+![Pre](./Reference/PreStart.png)
+
+2.- Open Command Prompt as **Administrator**.
+
+3.- Go to folder to Locate File .BAT with CD command .
+
+4.- In the Prompt run the the File .BAT and wait to 
+finish.
+
+![S](./Reference/Start.png)
+
+5.- At the finish of execution of this file the prompt show **parameters** that you need configure in the **appsettings.json** of two Solution in Folder **01_Application_Deployment**.
+
+![S](./Reference/Finish.png)
+
+5.- After you replace the values in the appsettings.json. Yo need go to the Folder  [**01_Application_Deployment**](../01_Application_Deployment) and follow the instructions.
 
 
 

@@ -2,16 +2,43 @@
 
 After following all previous steps, you will have a resource group containing a pair of CosmosDB, a Storage Account,kev Vault, BlockChain Servie, Container and a Kubernetes cluster. The Kubernetes cluster will be hosting a our solution.
 
-There are a few modifications to the [Contoso.DigitalGoodsToken.sln](./src/./src/Contoso.DigitalGoodsToken.sln) that need to be made to work with your infrastructure. The connection strings of Cosmos DB and Key Vaults.
 
-<!-- To update the necessary appsettings.json connection strings, run the deploy.ps1 script. -->
 
 ## Prerequisites
-1. Infrastructure deployed in the folder [00_Resource_Deployment](../00_Resource_Deployment)
-2. [Visual Studio](https://visualstudio.microsoft.com/)
-3. Updated connection strings
 
-## Options to Run/Deploy our Code
+1. Infrastructure deployed in the folder [00_Resource_Deployment](../00_Resource_Deployment) wiht the file bat
+
+2. [Visual Studio](https://visualstudio.microsoft.com/)
+
+3. [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+## How to Deploy your Solution
+
+To deploy:
+
+* Application Service
+* BlockChain Service
+* Microsoft Token Service 
+
+Follow the next points.
+
+
+1. The file deploy1.bat created the all resources that you need in Azure Subscription but also create other ps script to deploy the solution based in templates files. This files generated are Deployresources2.ps1, DeployApp.yml and deployTokenServices.yml and this are ready to be executed. This information is only informative to yout Knowledge, please follow the next steps. Other task that do the first Bat is modify the connection strings in the solution and put the correct values. 
+
+2. Open Command Prompt as **Administrator**.
+
+3. Go to folder to Locate File [deploy2.bat](../deploy2.bat) .BAT with CD command .
+
+4. In the Prompt run the the File .BAT and wait to 
+finish.
+
+![S](./Reference/S.png)
+
+![F](./Reference/S.png)
+
+5. The execution of this file invokes the Api´s Deploy Building a image with Docker and Push the image to the Container Registry in Azure and Configure in K8s service.
+
+## How to Run Locally you Solution
 
 **1.- Local with visual Studio**
 
@@ -45,48 +72,6 @@ In the Next images we have the specif steps to execute the solution:
 ![7 ](./Local/7.png)
 
 * You need configure the connections strings, secrets and configure JWT information for each project in the appsetting.json.
-
-
-**2.- Create a Image and Deploy in our Container to Kubernates**
-
-Other option is build a image with  build of docker and deploy to the container and we have create a pipeline.
-
-This pipeline can you execute in automatic with azure devops or manually installing Docker and execute all in command line and helping with visual studio.
-
-The steps by step have the next points:
-
-* Build a Image (With a Docker build)
-* Push the Image to Container Registry
-* Publish the Artifact
-* Download the Artifact
-* Create a Image
-* Deploy Image to Kubernates
-
-In our case we need create this operation for our two services **Token.API** and  **Application.API**.
-
-In our project we have the files necesaries to create a pipeline.
-
-A sample of [pipeline](./azure-pipelines.yml) that we use in azure devops. 
-
-This file have dependencies the DockerFiles for each project:
-
-A sample of Docker File build a image are in each project [ApplicationApi](./src/Contoso.DigitalGoods.Application.API/Dockerfile) and [TokenApi](./src/Contoso.DigitalGoods.TokenService.API/Dockerfile)
-
-An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
-
-The Visual Studio Solution have a project Docker that create a image and launch in Web. Do you need have install Docker Desktop to run this project but you can take like reference to generate files in Azure DevOps.
-
-
-  ![Docker](./Local/DockerCompose.png)
-
-
-
-
-
-
-
-
-
 
 
 ## Components
