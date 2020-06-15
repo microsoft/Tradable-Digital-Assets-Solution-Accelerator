@@ -38,12 +38,28 @@ finish.
 
 ![S](./References/Information_Finish.png)
 
-![S](./References/Configuration.png)
+
+AppSetting.json Application API
+
+![S](./References/ApplicationApijson.png)
+
+AppSetting.json Token API
+
+![S](./References/TokenJson.png)
 
 5.- After you replace the values in the appsettings.json. Yo need go to the Folder  [**01_Application_Deployment**](../01_Application_Deployment) and follow the instructions.
 
 6.- Only for your information this BAT File Executiong create the resources and create other files like ps script, yml to build image and configuration to push the image to container. Also crate files in storage and keys in key vault.
 
+How To Verify the Deployment Resources
+
+You can take some actions to review the success Deploy of Resources.
+
+* Review the portal Azure and check that the resource group and 8 resources exists
+
+![S](./References/Resources.png)
+
+* Also you can check errors in the prompt and the creation of the files in the 01 Folder, ps script and yml files.
 
 
 

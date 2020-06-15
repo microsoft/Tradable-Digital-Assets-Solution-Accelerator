@@ -45,7 +45,7 @@ Also containt the templates that used to deploy the code to azure with the file 
 
 
 ### [02- Microsoft Token Service](./02_Microsoft_Token_Service)
-This folder contains the how to use and access to endpoint of Microsoft Token Service.
+This folder contains the source code for Microsoft Token Service this is only for information because this API is deployed in previous section.
 
 ## Links
 Hosteds Site:

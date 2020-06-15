@@ -38,6 +38,34 @@ finish.
 
 5. The execution of this file invokes the Api´s Deploy Building a image with Docker and Push the image to the Container Registry in Azure and Configure in K8s service.
 
+## How to Verify The Deploy
+
+  After the execution of deploy1 and deploy2, we should been resources and apis deployed. So to verify the apis follow the next points.
+
+* Go to resources in azure portal and select the kubernates Service
+
+
+
+* Go to  Propierties and Select The Infrastructure resource group
+
+![S](./References/Kubernates.png)
+
+
+
+* Inside this you can see the 3 IPS
+
+![S](./References/Ips.png)
+
+* Select Each and go to Configuration and Copy the IP Address. 
+
+![S](./References/IP.png)
+
+* After that paste in a browser and write after the Ip /Swagger and verify what API is Deployed.
+
+![S](./References/Application.png)
+
+* You need this with each IP for verify each deploymeny.
+
 ## How to Run Locally you Solution
 
 # Steps
