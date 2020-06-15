@@ -1,16 +1,13 @@
 # Application Deployment
 
-After review the previous sections. You have a deployed resources in azure, a source code that now you know how to deploy and run in Visual Studio/Azure and Docker. You have how to access to the endpoints of Solution (Application and Blockchain Actions).
-
-Now in this part you can learn and discover the endpoint of Microsoft Token Service that provide to Blockchain actions the logic to manage Tokens (Aprove, Deploy and Propierties), Service Managment (BlockChain Network, Parties, Users)
+After review the previous sections. You have a deployed resources in azure and deploy is done for all the Api services. This sections is to Know more about Microsoft Token Services.
 
 ## Prerequisites
 1. [Postman](https://www.postman.com/)
-2. Updated scripts
-3. Visual Studio
+2. Visual Studio
 
 
-## How to run the solution
+## How to run local the solution
 
 * Open the Solution [MIcrosoft.TokenService.sln]()
 
@@ -29,35 +26,6 @@ Now in this part you can learn and discover the endpoint of Microsoft Token Serv
 
 Note: To Run the solution in Local Enviroment you need update the URL in ContosoSolution with the Microsoft Token Services Solution.
 
-## How to Deploy the solution
-
-Other option is build a image with  build of docker and deploy to the container and we have create a pipeline.
-
-This pipeline can you execute in automatic with azure devops or manually installing Docker and execute all in command line and helping with visual studio.
-
-The steps by step have the next points:
-
-* Build a Image (With a Docker build)
-* Push the Image to Container Registry
-* Publish the Artifact
-* Download the Artifact
-* Create a Image
-* Deploy Image to Kubernates
-
-In our case we need create this operation for our  services **Microsoft.TokenService.API**
-
-In our project we have the files necesaries to create a pipeline.
-
-A sample of [pipeline](./azure-pipelines.yml) that we use in azure devops. 
-
-This file have dependencies the DockerFiles for each project:
-
-A sample of Docker File build a image are in each project [Microsoft.TokenService.API](./src
-/Microsoft.TokenService.API/Dockerfile)
-
-An manifest files that indicates the [Deployment](./manifests/deployment.yml) setings that indicate where to deploy the versions. And [Service](./manifests/service.yml) Settings that indicate the number of nodes.
-
-You can create a Docker Project like our Solution Digital Good to run with image and docker and give more context.
 
 ## How to consume the endpoint
 
