@@ -7,6 +7,7 @@ This folder contains a PowerShell scripts that can be used to provision the Azur
 |-----------------------|-------------------------------------------------------------------------------------------|
 |[Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/)  | The user information stored as a document    
 |[Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/)  | The catalog, gifts, assets information stored as a document         |
+|[Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/)  | Azure Cosmo DB for Microsoft Token Service         |
 |[Azure Storage Account](https://azure.microsoft.com/en-us/services/storage/?v=18.24) | Data from Gifts and Assets|    
 |[Key Vault ](https://azure.microsoft.com/en-us/services/key-vault/) | Store the Secret and Key to Encript Data and generate token for auth and communication   
 |[Container Registry ](https://azure.microsoft.com/en-us/services/container-registry/) | Registry for the app in BlockChain  
