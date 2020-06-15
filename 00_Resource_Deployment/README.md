@@ -37,6 +37,8 @@ finish.
 
 ![S](./References/Information_Finish.png)
 
+![S](./References/Configuration.png)
+
 5.- After you replace the values in the appsettings.json. Yo need go to the Folder  [**01_Application_Deployment**](../01_Application_Deployment) and follow the instructions.
 
 6.- Only for your information this BAT File Executiong create the resources and create other files like ps script, yml to build image and configuration to push the image to container. Also crate files in storage and keys in key vault.
