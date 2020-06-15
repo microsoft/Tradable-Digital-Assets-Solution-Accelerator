@@ -35,7 +35,7 @@ finish.
 
 5.- At the finish of execution of this file the prompt show **parameters** that you need configure in the **appsettings.json** of two Solution in Folder **01_Application_Deployment**.
 
-![S](./References/Finish.png)
+![S](./References/Information_Finish.png)
 
 5.- After you replace the values in the appsettings.json. Yo need go to the Folder  [**01_Application_Deployment**](../01_Application_Deployment) and follow the instructions.
 
