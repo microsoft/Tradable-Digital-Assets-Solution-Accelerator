@@ -23,26 +23,28 @@ To deploy:
 Follow the next points.
 
 
-1. The file deploy1.bat created the all resources that you need in Azure Subscription but also create other ps script to deploy the solution based in templates files. This files generated are Deployresources2.ps1, DeployApp.yml and deployTokenServices.yml and this are ready to be executed. This information is only informative to yout Knowledge, please follow the next steps. Other task that do the first Bat is modify the connection strings in the solution and put the correct values. 
+1. The file [deploy1.bat](../deploy1.bat) invokes [deployResources1.ps1](../00_Resource_Deployment/DeployResources1.ps1) which created all Azure resources that you need in Azure Subscription also generated powershell script [deployResources2.ps1](./DeployResources2.ps1) to deploy source codes with dynamic values.  
+   The generated files by deployResource1.ps1 are [deployResources2.ps1](./DeployResources2.ps1), DeployApp.yml and deployTokenServices.yml and this are ready to be executed.  
+   This Information is only informative to your Knowledge, please follow the next steps. Other task that do the first Bat is modify the connection strings in the solution and put the correct values.  
 
 2. Open Command Prompt as **Administrator**.
 
 3. Go to folder to Locate File [deploy2.bat](../deploy2.bat) .BAT with CD command .
 
-4. In the Prompt run the the File .BAT and wait to 
-finish.
-
-![S](./References/S.png)
+4. In the Prompt run the the File .BAT and wait to finish.
+   
+       \Tradable-Digital-Assets-Solution-Accelerator\deploy2 .bat
 
 ![F](./References/S.png)
 
-5. The execution of this file invokes the Api´s Deploy Building a image with Docker and Push the image to the Container Registry in Azure and Configure in K8s service.
+You can see the source codes are containerized and push Container registry then deploy in Kubernetes cluster.
 
 ## How to Verify The Deploy
 
-  After the execution of deploy1 and deploy2, we should been resources and apis deployed. So to verify the apis follow the next points.
+  After the execution of [deploy1.bat](../deploy1.bat) and [deploy2.bat](../deploy2.bat), we may check all of resources has been created and applications are deployed in Kubernetes correctly.  
+  It's time to verify the apis with following steps.
 
-* Go to resources in azure portal and select the kubernates Service
+* Go to resources in azure portal and select the kubernetes Service
 
 
 
@@ -52,19 +54,20 @@ finish.
 
 
 
-* Inside this you can see the 3 IPS
+* Inside this you can check 3 Public IP addresses
 
 ![S](./References/Ips.png)
 
-* Select Each and go to Configuration and Copy the IP Address. 
+* Select Each and go to Configuration and Copy the IP Address. (or you may use DNS name per each Public IP address)
 
 ![S](./References/IP.png)
 
-* After that paste in a browser and write after the Ip /Swagger and verify what API is Deployed.
+* Check the each Service endpoints with this url - [http://Public_IP_Addresss/swagger](http://Public_IP_Addresss/swagger) in your browser.
+
 
 ![S](./References/Application.png)
 
-* You need this with each IP for verify each deploymeny.
+* You can check Application API, Token Service API and Microsoft Token Service API endpoints with each IPs with this way.
 
 ## How to Run Locally you Solution
 
@@ -101,6 +104,7 @@ In the Next images we have the specif steps to execute the solution:
 
 
 ## Components
+
 This project contains a number of components described below.
 
 | Resource              | Usage                                                                                     |
