@@ -40,13 +40,29 @@ To deploy our resources we need execute the next steps.
 
 ![S](./References/Information_Finish.png)
 
+
+
 Open [AppSetting.json](../01_Application_Deployment/src/Contoso.DigitalGoods.Application.API/appsettings.json) for Application API and update placeholders with Configuration values.  
 Update **ContosoID**, **PartyID** and **BlockchainNetworkID** placeholders with Configuration values. (another values in placeholders will be updated by script)
+
+
+
+Before 
+
+![S](./References/AppBat1.png)
+
+After 
 
 ![S](./References/ApplicationApijson.png)
 
 Open [AppSetting.json](../01_Application_Deployment/src/Contoso.DigitalGoods.TokenService.API/appsettings.json) for Token API and update placeholders with Configuration values.   
 Update **ContosoID**, **TokenID**, **ContoProductManager**,**PartyID** and **BlockchainNetworkID** placeholders with Configuration values. (another values in placeholders will be updated by script)
+
+Before 
+
+![S](./References/App2Bat1.png)
+
+After 
 
 ![S](./References/TokenJson.png)
 
