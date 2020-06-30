@@ -26,7 +26,7 @@ $azurecosmosaccountapp = "contosogoodsappdb$surfix"
 $storageAccountName = "contosogoodsblob$surfix"
 $containerregistry = "contosogoodsacr$surfix"
 $azureblockchaineservice = "contosoledger$surfix"
-$propertiesservice = '{\"location\":\"westus2\", \"properties\":{\"password\":\"DigitalGoods@1\", \"protocol\":\"Quorum\", \"consortium\":\"digitalgoodsconsotiumsample\", \"consortiumManagementAccountPassword\":\"DigitalGoods@1\"}, \"sku\":{\"name\":\"S0\"}}'
+$propertiesservice = '{\"location\":\"westus2\", \"properties\":{\"password\":\"DigitalGoods@1\", \"protocol\":\"Quorum\", \"consortium\":\"digitalgoods\", \"consortiumManagementAccountPassword\":\"DigitalGoods@1\"}, \"sku\":{\"name\":\"S0\"}}'
 $azurecosmosMicrosofttokensvc = "abtdb$surfix"
 
 
