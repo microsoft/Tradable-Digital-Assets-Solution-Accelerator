@@ -16,8 +16,7 @@ namespace Contoso.DigitalGoods.DigitalLocker.Test
         [TestInitialize]
         public void InitTest()
         {
-            //mongoConnectionString = "mongodb://cryptogood-app:PbUAtgv7QITNdy3fILD6s7CWVJYIzHXFDRpfYKhlNif1btbgwSX5ujbSq2ck9xNClucfMuoMWDrQOeg3jNQBlQ==@cryptogood-app.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
-            tokenAPIURL = "http://http://13.66.94.77/";
+            tokenAPIURL = "";
             _manager = new CryptoGoodLocker(productCatalogManager, tokenAPIURL);
         }
 
