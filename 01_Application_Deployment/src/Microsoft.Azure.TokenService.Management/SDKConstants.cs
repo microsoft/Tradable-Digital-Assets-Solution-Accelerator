@@ -4,10 +4,10 @@
 
     public static class SDKConstants
     {
-        public const string ClientSecret = "zJWmadWm2Xu9Bexsd9KQCQIAR6Oz.:@]";
-        public const string ClientId = "fe898dda-c1b7-408a-b75a-e6776225c6bd";
-        public const string AzureTenantId = "f686d426-8d16-42db-81b7-ab578e110ccd";
-        public const string AzureSubscriptionId = "1e5f5d29-1b9b-4330-bacb-e6a00e4e8a66";
+        public const string ClientSecret = "";
+        public const string ClientId = "";
+        public const string AzureTenantId = "";
+        public const string AzureSubscriptionId = "";
 
         //public const string ApiVersion1 = "api/v1/";
         //public const string AccountsUri = ApiVersion1 + "accounts";
