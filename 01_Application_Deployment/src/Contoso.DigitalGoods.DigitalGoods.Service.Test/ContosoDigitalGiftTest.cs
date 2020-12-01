@@ -24,7 +24,7 @@ namespace Contoso.DigitalGoods.ContosoProfile.Service.Test
         public void InitTest()
         {
             //connstring should be removed
-            mongoConnectionString = "mongodb://cryptoKick-app:PbUAtgv7QITNdy3fILD6s7CWVJYIzHXFDRpfYKhlNif1btbgwSX5ujbSq2ck9xNClucfMuoMWDrQOeg3jNQBlQ==@cryptoKick-app.documents.azure.com:10255/?ssl=true&replicaSet=globaldb";
+            mongoConnectionString = "";
             tokenAPIURL = "http://13.66.95.45";
 
             //userid need to be changed at your env.
