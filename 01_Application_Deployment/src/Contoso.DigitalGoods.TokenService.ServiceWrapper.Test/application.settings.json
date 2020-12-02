@@ -1,14 +1,14 @@
 {
   "Values": {
-    "AUTHENTICATION_ENDPOINT": "https://login.windows-ppe.net/",
-    "TOKENAUDIENCE_URI": "spn:e6182fa1-0f55-40b5-86ad-20a919e842c0",
-    "APPLICATIONID": "aeae2788-6f1b-4e2b-bae9-45e7fe76a723",
-    "Domain": "f686d426-8d16-42db-81b7-ab578e110ccd",
+    "AUTHENTICATION_ENDPOINT": "",
+    "TOKENAUDIENCE_URI": "",
+    "APPLICATIONID": "",
+    "Domain": "",
     "offchain_connectionstring": "",
     "SECRET": "",
-    "SERVICEENDPOINT": "https://echopreview.bcpe.azure-test.net",
-    "TokenID": "e140784c-bb56-4b13-9baf-737a3cae0b54",
-    "ContosoID": "04cbac3c-e950-466e-9935-416738563d97",
+    "SERVICEENDPOINT": "",
+    "TokenID": "",
+    "ContosoID": "",
     "ContosoProductManager": "Contosoproductmanager"
   }
 }

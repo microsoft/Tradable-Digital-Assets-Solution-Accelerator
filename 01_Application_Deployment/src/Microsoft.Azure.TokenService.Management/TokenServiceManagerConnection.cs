@@ -57,39 +57,6 @@ namespace Microsoft.Azure.TokenService.Management
             return await response.Content.ReadAsStringAsync();
         }
 
-        #region RestClient Creation for Azure Resource Manage Fluent. (obsolute)
-        //private static RestClient CreateRestClient()
-        //{
-        //    var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-        //        SDKConstants.ClientId,
-        //        SDKConstants.ClientSecret,
-        //        SDKConstants.AzureTenantId,
-        //        new AzureEnvironment()
-        //        {
-        //            AuthenticationEndpoint = SDKConstants.ActiveDirectoryEndpoint,
-        //            ResourceManagerEndpoint = SDKConstants.ManagementEndPoint,
-        //            ManagementEndpoint = SDKConstants.ActiveDirectoryServiceEndpointResourceId,
-        //            GraphEndpoint = "https://graph.windows-int.net/",
-        //            StorageEndpointSuffix = "http://core.windows-int.net/",
-        //            KeyVaultSuffix = "vault.azure.net"
-        //        });
-
-        //    return RestClient
-        //         .Configure()
-        //         .WithEnvironment(new AzureEnvironment()
-        //         {
-        //             AuthenticationEndpoint = SDKConstants.ActiveDirectoryEndpoint,
-        //             ResourceManagerEndpoint = SDKConstants.ManagementEndPoint,
-        //             ManagementEndpoint = SDKConstants.ActiveDirectoryServiceEndpointResourceId,
-        //             GraphEndpoint = "https://graph.windows-int.net/",
-        //             StorageEndpointSuffix = "http://core.windows-int.net/",
-        //             KeyVaultSuffix = "vault.azure.net"
-        //         })
-        //         .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
-        //         .WithCredentials(credentials)
-        //         .WithBaseUri(SDKConstants.ManagementEndPoint)
-        //         .Build();
-        //}
-        #endregion
+ 
     }
 }

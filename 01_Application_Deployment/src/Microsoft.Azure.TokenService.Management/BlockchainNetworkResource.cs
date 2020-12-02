@@ -83,9 +83,7 @@ namespace Microsoft.Azure.TokenService.Management
 
             return JsonConvert.DeserializeObject<Model.ResponseProertyBagBase<BlockchainNetworkResponsePropertyBag>>(responseContent);
 
-            //"https://api-dogfood.resources.windows-int.net/subscriptions/1e5f5d29-1b9b-4330-bacb-e6a00e4e8a66/resourceGroups/ABTTest/providers/Microsoft.BlockchainTokens/tokenServices/echopreview/blockchainNetworks?api-version=2019-07-19-preview"
-            //""https://api-dogfood.resources.windows-int.net//subscriptions/1e5f5d29-1b9b-4330-bacb-e6a00e4e8a66/resourceGroups/ABTTest/providers/Microsoft.BlockchainTokens/tokenServices/echopreview/groups/msft/accounts?api-version=2019-07-19-preview""
-            //"https://api-dogfood.resources.windows-int.net/subscriptions/1e5f5d29-1b9b-4330-bacb-e6a00e4e8a66/resourceGroups/ABTTest/providers/Microsoft.BlockchainTokens/tokenServices/echopreview/groups?api-version=2019-07-19-preview"
+      
         }
 
 

@@ -2,13 +2,13 @@
   "Values": {
     "AUTHENTICATION_ENDPOINT": "",
     "TOKENAUDIENCE_URI": "",
-    "APPLICATIONID": "aeae2788-6f1b-4e2b-bae9-45e7fe76a723",
-    "Domain": "f686d426-8d16-42db-81b7-ab578e110ccd",
-    "offchain_connectionstring": "mongodb",
+    "APPLICATIONID": "",
+    "Domain": "",
+    "offchain_connectionstring": "",
     "SECRET": "",
-    "SERVICEENDPOINT": "https://echopreview.bcpe.azure-test.net",
-    "TokenID": "e140784c-bb56-4b13-9baf-737a3cae0b54",
-    "ContosoID": "04cbac3c-e950-466e-9935-416738563d97",
+    "SERVICEENDPOINT": "",
+    "TokenID": "",
+    "ContosoID": "",
     "ContosoProductManager": "Contosoproductmanager"
   }
 }

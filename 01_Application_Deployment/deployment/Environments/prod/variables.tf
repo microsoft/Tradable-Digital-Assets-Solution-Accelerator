@@ -77,7 +77,7 @@ variable "nike_owner" {
 variable "nike_owning_group" {
   description = "Email address distribution list representing group owning / running this subscription"
   type    = string
-  default = "lst-nikecryptokicks@nike.com"
+  default = ""
 }
 
 variable "nike_data_classification" {

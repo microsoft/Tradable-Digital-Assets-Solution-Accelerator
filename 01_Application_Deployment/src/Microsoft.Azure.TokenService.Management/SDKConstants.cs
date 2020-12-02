@@ -19,9 +19,9 @@
 
 
         // Azure PPE constants
-        public static string ActiveDirectoryEndpoint = "https://login.windows-ppe.net/";
-        public static string ActiveDirectoryServiceEndpointResourceId = "https://management.core.windows.net/";
-        public static string ManagementEndPoint = "https://api-dogfood.resources.windows-int.net/";
+        public static string ActiveDirectoryEndpoint = "";
+        public static string ActiveDirectoryServiceEndpointResourceId = ";
+        public static string ManagementEndPoint = "";
 
         // Munich constants
         public static string TokenServiceProviderNamespace = "Microsoft.BlockchainTokens";

@@ -20,9 +20,9 @@ namespace Contoso.DigitalGoods.ProductCatalog.Service.Test
         {
             //connstring should be removed
             mongoConnectionString = Config["Values:offchain_appconnectionstring"];
-            productID = "TestProduct";
-            productSubID = "TestSub";
-            productDes = "TestDes";
+            productID = "";
+            productSubID = "";
+            productDes = "";
 
             _manager = new ProductCatalogManager(mongoConnectionString, "ProductCatalog");
 

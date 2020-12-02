@@ -25,13 +25,13 @@ namespace Contoso.DigitalGoods.ContosoProfile.Service.Test
         {
             //connstring should be removed
             mongoConnectionString = "";
-            tokenAPIURL = "http://13.66.95.45";
+            tokenAPIURL = "";
 
             //userid need to be changed at your env.
-            senderContosoid = "39972f98-583e-47fa-adaa-1dea60c82b27";
-            senderAbtUserID = "67df940d-539d-4ff4-a4cf-60e992e129d0";
-            reciverContosoid = "7fded3b8-68d3-44c4-a1d0-18d09a605496";
-            reciverAbtUserID = "5e5b2faf-f812-4437-86a5-a1731fe4979d";
+            senderContosoid = "";
+            senderAbtUserID = "";
+            reciverContosoid = "";
+            reciverAbtUserID = "";
             giftId = 1;
             _manager = new GiftManager(mongoConnectionString, "CryptoGifts", senderContosoid, tokenAPIURL);
         }
