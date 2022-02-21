@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EAE.Solutions.CosmosDB.Security.ManagedIdentity" Version="0.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
+  </ItemGroup>
+
+</Project>

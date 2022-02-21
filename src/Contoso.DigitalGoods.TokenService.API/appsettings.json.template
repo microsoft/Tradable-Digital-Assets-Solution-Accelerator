@@ -1,0 +1,21 @@
+{
+  "Values": {
+    "TokenID": "{Update it from Setup Application}",
+    "ContosoID": "{Update it from Setup Application}",
+    "ContosoProductManager": "{Update it from Setup Application}",
+    "ServiceEndpoint": "http://{tokenserviceendpoint}/",
+    "PartyID": "{Update it from Setup Application}",
+    "BlockchainNetworkID": "{Update it from Setup Application}"
+  },
+  "Identity": {
+    "SubscriptionId": "",
+    "ResourceGroupName": "",
+    "DatabaseAccountName": "",
+    "ManagedIdentityId": ""
+  },
+  "JwtToken": {
+    "Issuer": "http://Contoso.com",
+    "Audience": "com.Contoso.brand.CryptoGoods.web",
+    "SecretKey": ""
+  }
+}

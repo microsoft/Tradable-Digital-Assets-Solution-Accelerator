@@ -1,0 +1,557 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.4.1124.51302",
+      "templateHash": "16309566794311269220"
+    }
+  },
+  "variables": {
+    "resourceprefix": "[format('{0}', take(uniqueString(deployment().name), 5))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2020-10-01",
+      "name": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "location": "[deployment().location]"
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('UserIdentity-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {},
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "4733100056389957851"
+            }
+          },
+          "parameters": {
+            "tsaUserIdentityName": {
+              "type": "string",
+              "defaultValue": "[format('ContosoGoodsUserIdentity-{0}', take(uniqueString(resourceGroup().id), 5))]",
+              "metadata": {
+                "description": "Provide Managed Idenity user name."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for creating managed identity."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+              "apiVersion": "2018-11-30",
+              "name": "[parameters('tsaUserIdentityName')]",
+              "location": "[parameters('location')]"
+            }
+          ],
+          "outputs": {
+            "createdTsaUserIdentity": {
+              "type": "string",
+              "value": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('tsaUserIdentityName'))]"
+            },
+            "createdTsaUserIdentityId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('tsaUserIdentityName'))).principalId]"
+            },
+            "createdTsaUserIdentityClientId": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('tsaUserIdentityName'))).clientId]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('acr-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {},
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "8805477278351352262"
+            }
+          },
+          "parameters": {
+            "acrName": {
+              "type": "string",
+              "defaultValue": "[format('acrcontosogoods{0}', take(uniqueString(resourceGroup().id), 5))]",
+              "metadata": {
+                "description": "Provide a globally unique name of your Azure Container Registry"
+              },
+              "maxLength": 50,
+              "minLength": 5
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Provide a location for the registry."
+              }
+            },
+            "acrSku": {
+              "type": "string",
+              "defaultValue": "Basic",
+              "metadata": {
+                "description": "Provide a tier of your Azure Container Registry."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.ContainerRegistry/registries",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[parameters('acrName')]",
+              "location": "[parameters('location')]",
+              "sku": {
+                "name": "[parameters('acrSku')]"
+              },
+              "properties": {
+                "adminUserEnabled": true
+              }
+            }
+          ],
+          "outputs": {
+            "createdAcrName": {
+              "type": "string",
+              "value": "[parameters('acrName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('aks-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {},
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "12936442879256836642"
+            }
+          },
+          "parameters": {
+            "aksName": {
+              "type": "string",
+              "defaultValue": "[format('akscontosogoods{0}', take(uniqueString(resourceGroup().id), 5))]",
+              "metadata": {
+                "description": "Provide a globally unique name of your Azure kubernetes Cluster"
+              },
+              "maxLength": 50,
+              "minLength": 5
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Provide a location for aks."
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.ContainerService/managedClusters",
+              "apiVersion": "2021-10-01",
+              "name": "[parameters('aksName')]",
+              "location": "[parameters('location')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
+              "properties": {
+                "dnsPrefix": "[parameters('aksName')]",
+                "enableRBAC": true,
+                "kubernetesVersion": "1.21.9",
+                "agentPoolProfiles": [
+                  {
+                    "name": "nodepool1",
+                    "count": 1,
+                    "vmSize": "Standard_D2_v2",
+                    "mode": "System"
+                  }
+                ]
+              }
+            }
+          ],
+          "outputs": {
+            "createdAksName": {
+              "type": "string",
+              "value": "[parameters('aksName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('cosmos-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {},
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "14145848351022049455"
+            }
+          },
+          "variables": {
+            "cosmosAppAccountName": "[format('cosmos-contosogoodsappdb-{0}', take(uniqueString(resourceGroup().id), 5))]",
+            "location": "[resourceGroup().location]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.DocumentDB/databaseAccounts",
+              "apiVersion": "2021-10-15",
+              "name": "[variables('cosmosAppAccountName')]",
+              "location": "[variables('location')]",
+              "kind": "MongoDB",
+              "properties": {
+                "enableAutomaticFailover": false,
+                "enableMultipleWriteLocations": false,
+                "isVirtualNetworkFilterEnabled": false,
+                "virtualNetworkRules": [],
+                "databaseAccountOfferType": "Standard",
+                "consistencyPolicy": {
+                  "defaultConsistencyLevel": "ConsistentPrefix",
+                  "maxIntervalInSeconds": 5,
+                  "maxStalenessPrefix": 100
+                },
+                "locations": [
+                  {
+                    "locationName": "[variables('location')]",
+                    "failoverPriority": 0,
+                    "isZoneRedundant": false
+                  }
+                ],
+                "capabilities": [
+                  {
+                    "name": "EnableMongo"
+                  }
+                ]
+              }
+            }
+          ],
+          "outputs": {
+            "createdCosmosDBName": {
+              "type": "string",
+              "value": "[variables('cosmosAppAccountName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('akv-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "tradableDigitalUserIdentityId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('UserIdentity-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdTsaUserIdentityId.value]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "15661169186161522293"
+            }
+          },
+          "parameters": {
+            "akvName": {
+              "type": "string",
+              "defaultValue": "[format('akcontosogoods{0}', take(uniqueString(resourceGroup().id), 5))]",
+              "metadata": {
+                "description": "Provide a globally unique name of your Azure Keyvault"
+              },
+              "maxLength": 50,
+              "minLength": 5
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Provide a location for Key Vault."
+              }
+            },
+            "tradableDigitalUserIdentityId": {
+              "type": "string",
+              "metadata": {
+                "description": "Tradable Digital User Managed Identity"
+              }
+            },
+            "param_tenantId": {
+              "type": "string",
+              "defaultValue": "[subscription().tenantId]"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.KeyVault/vaults/keys",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('akvName'), 'GiftEncKey')]",
+              "properties": {
+                "attributes": {
+                  "enabled": true
+                },
+                "kty": "RSA"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('akvName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.KeyVault/vaults",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[parameters('akvName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "accessPolicies": [
+                  {
+                    "permissions": {
+                      "keys": [
+                        "get",
+                        "wrapKey",
+                        "unwrapKey"
+                      ]
+                    },
+                    "objectId": "[parameters('tradableDigitalUserIdentityId')]",
+                    "tenantId": "[parameters('param_tenantId')]"
+                  }
+                ],
+                "createMode": "default",
+                "enableSoftDelete": true,
+                "sku": {
+                  "family": "A",
+                  "name": "standard"
+                },
+                "softDeleteRetentionInDays": 90,
+                "tenantId": "[parameters('param_tenantId')]"
+              }
+            }
+          ],
+          "outputs": {
+            "createdAkvUri": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.KeyVault/vaults', parameters('akvName'))).vaultUri]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('UserIdentity-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('st-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "11889116567593153476"
+            }
+          },
+          "variables": {
+            "tsaStorageName": "[format('stcontosogoods{0}', take(uniqueString(resourceGroup().id), 5))]",
+            "location": "[resourceGroup().location]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2021-06-01",
+              "name": "[format('{0}/{1}/{2}', variables('tsaStorageName'), 'default', 'giftkey')]",
+              "properties": {},
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('tsaStorageName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('tsaStorageName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices",
+              "apiVersion": "2021-06-01",
+              "name": "[format('{0}/{1}', variables('tsaStorageName'), 'default')]",
+              "properties": {},
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('tsaStorageName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2021-06-01",
+              "name": "[variables('tsaStorageName')]",
+              "location": "[variables('location')]",
+              "sku": {
+                "name": "Standard_LRS"
+              },
+              "kind": "StorageV2"
+            }
+          ],
+          "outputs": {
+            "createdStorageAccName": {
+              "type": "string",
+              "value": "[variables('tsaStorageName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('pid-{0}', variables('resourceprefix'))]",
+      "resourceGroup": "[format('tradabledigital-{0}', variables('resourceprefix'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {},
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1124.51302",
+              "templateHash": "3618099306488589792"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deployments",
+              "apiVersion": "2021-04-01",
+              "name": "pid-061ff772-6c53-588a-8308-3c4e26553581",
+              "properties": {
+                "mode": "Incremental",
+                "template": {
+                  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                  "contentVersion": "1.0.0.0",
+                  "resources": []
+                }
+              },
+              "metadata": {
+                "description": "create resource with Tradable Digital Trace ID"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('tradabledigital-{0}', variables('resourceprefix')))]"
+      ]
+    }
+  ],
+  "outputs": {
+    "aksName": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('aks-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdAksName.value]"
+    },
+    "acrName": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('acr-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdAcrName.value]"
+    },
+    "cosmosName": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('cosmos-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdCosmosDBName.value]"
+    },
+    "akvUrl": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('akv-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdAkvUri.value]"
+    },
+    "tradableDigitalRgName": {
+      "type": "string",
+      "value": "[format('tradabledigital-{0}', variables('resourceprefix'))]"
+    },
+    "tsaUserIdentityClientId": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('UserIdentity-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdTsaUserIdentityClientId.value]"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('tradabledigital-{0}', variables('resourceprefix'))), 'Microsoft.Resources/deployments', format('st-{0}', variables('resourceprefix'))), '2020-10-01').outputs.createdStorageAccName.value]"
+    }
+  }
+}

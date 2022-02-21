@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Contoso.DigitalGoods.Application.API</name>
+    </assembly>
+    <members>
+        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.DigitalGoodsGiftController.ResolveURLAndTransferGiftToken(System.String)">
+            <summary>
+            Get Encrypted URL and resolve information then Transfer token to User
+            </summary>
+            <param name="encryptedGiftID"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Contoso.DigitalGoods.Application.API.Controllers.UserProfileController">
+            <summary>
+            User Profile Service API
+            </summary>
+        </member>
+        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.UserProfileController.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Contoso.DigitalGoods.ContosoProfile.Service.IContosoProfileManager)">
+            <summary>
+            
+            </summary>
+            <param name="httpContextAccessor"></param>
+            <param name="ProfileManager"></param>
+        </member>
+        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.UserProfileController.ProvisionUser(System.String)">
+            <summary>
+            Provisioning User's Digital Locker and Registering NFTService User ID
+            </summary>
+            <param name="ContosoIdentifier">Contoso User Identifier which can be get through Contoso Authentication</param>
+            <returns></returns>
+        </member>
+        <member name="M:Contoso.DigitalGoods.Application.API.Controllers.UserProfileController.GetNFTServiceUserID(System.String)">
+            <summary>
+            Return NFTServiceUserID from ContosoIdentifier
+            </summary>
+            <param name="ContosoIdentifier"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

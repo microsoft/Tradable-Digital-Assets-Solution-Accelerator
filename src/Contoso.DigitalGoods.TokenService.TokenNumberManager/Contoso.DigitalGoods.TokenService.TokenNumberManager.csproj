@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+{
+  "Values": {
+    "AUTHENTICATION_ENDPOINT": "",
+    "TOKENAUDIENCE_URI": "",
+    "APPLICATIONID": "",
+    "Domain": "",
+    "SECRET": "",
+    "SERVICEENDPOINT": "",
+    "TokenID": "",
+    "ContosoID": "",
+    "ContosoProductManager": "Contosoproductmanager"
+  }
+}

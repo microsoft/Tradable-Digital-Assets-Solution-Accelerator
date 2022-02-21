@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EAE.Solutions.CosmosDB.Security.ManagedIdentity" Version="0.7.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.Service\Contoso.DigitalGoods.DigitalLocker.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.OffChain\Contoso.DigitalGoods.OffChain.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.ServiceWrapper\Contoso.DigitalGoods.TokenService.ServiceWrapper.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TokenNumberManager\Contoso.DigitalGoods.TokenService.TokenNumberManager.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenService.TransactionIndexer\Contoso.DigitalGoods.TokenService.TokenTransactionIndexer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Solutions.NFT">
+      <HintPath>..\TokenServiceSDK\Microsoft.Solutions.NFT.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

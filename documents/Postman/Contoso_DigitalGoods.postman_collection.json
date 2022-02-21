@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "e8d2a338-87b3-4ab2-9ccc-335541618f79",
+		"name": "Contoso DigitalGoods",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DigitalGood App - UserProfile - Provisioning User by Contoso Identifier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/User/{{$guid}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"User",
+						"{{$guid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - UserProfile - Get UserProfile by Contoso Identifier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/User/{{ContosoIdentifier}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"User",
+						"{{ContosoIdentifier}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - DigitalLocker - Get All DigitalLocker Items for User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/DigitalLocker/{{ABT_Identifier}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"DigitalLocker",
+						"{{ABT_Identifier}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - DigitalLocker - Get DigitalLocker Item By TokenNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/DigitalLocker/{{ABT_Identifier}}/Tokens/{{TOKEN_NO}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"DigitalLocker",
+						"{{ABT_Identifier}}",
+						"Tokens",
+						"{{TOKEN_NO}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - Product Factory - MakeDigitalGood",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productId\": \"{{PRODUCTID}}\",\r\n  \"productName\": \"{{TITLE}}\",\r\n  \"imageURL\": \"http://mydigitalgoods\",\r\n  \"model3DURL\": \"http://mydigital3Dmodel\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Inventories/Users/ProductManager/DigitalGoods",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Inventories",
+						"Users",
+						"ProductManager",
+						"DigitalGoods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - Product Factory - Check DigitalGood from Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Inventories/Users/{{ContosoID}} /DigitalGoods/{{TOKEN_NO}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Inventories",
+						"Users",
+						"{{ContosoID}} ",
+						"DigitalGoods",
+						"{{TOKEN_NO}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - Gift Management - Create Gift",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Gifts?ContosoUserID=52d079f1-a953-4d88-a97e-f20c56360410&TokenID=4",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Gifts"
+					],
+					"query": [
+						{
+							"key": "ContosoUserID",
+							"value": "52d079f1-a953-4d88-a97e-f20c56360410"
+						},
+						{
+							"key": "TokenID",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood  App - Gift Management - Get All Gift Requests",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Gifts",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Gifts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - Gift Management - Generate Gift link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Gifts/GenerateURL?GiftID={{GIFTID}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Gifts",
+						"GenerateURL"
+					],
+					"query": [
+						{
+							"key": "GiftID",
+							"value": "{{GIFTID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - Gift Management - Get All Gift Request by GiftID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Gifts/{{GIFTID}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Gifts",
+						"{{GIFTID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI -  User Management - Get NFT Service User Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Users/{{ABT_Identifier}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Users",
+						"{{ABT_Identifier}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - User Management - Provisioning User in  NFT Service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ContosoUserIdentifier",
+							"value": "FooUser",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Users?ContosoUserIdentifier=Contoso ProductManager",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "ContosoUserIdentifier",
+							"value": "Contoso ProductManager"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - Token Management - Create new Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Tokens?TokenName={{$randomBsNoun}}Token&TokenSymbol={{$randomCompanySuffix}}&CallerID={{ContosoProductManager}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Tokens"
+					],
+					"query": [
+						{
+							"key": "TokenName",
+							"value": "{{$randomBsNoun}}Token"
+						},
+						{
+							"key": "TokenSymbol",
+							"value": "{{$randomCompanySuffix}}"
+						},
+						{
+							"key": "CallerID",
+							"value": "{{ContosoProductManager}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - Token Management - Get TokenInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenManagement/Tokens/0xaa12232e0bab1d60289143199f1da6548936140f?CallerID={{ContosoProductManager}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenManagement",
+						"Tokens",
+						"0xaa12232e0bab1d60289143199f1da6548936140f"
+					],
+					"query": [
+						{
+							"key": "CallerID",
+							"value": "{{ContosoProductManager}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood TokenAPI - TokenService - Check Token Owner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{TOKEN_SERVICE_ENDPOINT_IP}}/DigitalGood/TokenService/IsitMyToken?TokenNumber=4&CallerID={{ABT_Identifier}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{TOKEN_SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGood",
+						"TokenService",
+						"IsitMyToken"
+					],
+					"query": [
+						{
+							"key": "TokenNumber",
+							"value": "4"
+						},
+						{
+							"key": "CallerID",
+							"value": "{{ABT_Identifier}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - ProductCatalog - RegisterProductInfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{$guid}}\",\r\n  \"productID\": \"{{PRODUCTID}}\",\r\n  \"title\": \"{{TITLE}}\",\r\n  \"subtitle\": \"{{SUB_TITLE}}\",\r\n  \"description\": \"{{DESCRIPTION}}\",\r\n  \"assets\": [\r\n    {\r\n      \"type\": 0,\r\n      \"subType\": 0,\r\n      \"url\": \"http://mydigitalGoods\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Products",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - ProductCatalog - Get ProductInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Products/{{PRODUCTID}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Products",
+						"{{PRODUCTID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - ProductCatalog - Delete ProductInfo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Products/{{PRODUCTID}}",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Products",
+						"{{PRODUCTID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DigitalGood App - ProductCatalog - Get All Registered Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{PROTOCOL}}://{{SERVICE_ENDPOINT_IP}}/DigitalGoodsApp/Management/Products",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{SERVICE_ENDPOINT_IP}}"
+					],
+					"path": [
+						"DigitalGoodsApp",
+						"Management",
+						"Products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  contoso.digitalgoods.application.api:
+    image: ${DOCKER_REGISTRY-}contosodigitalgoodsapplicationapi
+    build:
+      context: .
+      dockerfile: Contoso.DigitalGoods.Application.API/Dockerfile
+    links: 
+        - "contoso.digitalgoods.tokenservice.api"
+        
+
+  contoso.digitalgoods.tokenservice.api:
+    image: ${DOCKER_REGISTRY-}contosodigitalgoodstokenserviceapi
+    build:
+      context: .
+      dockerfile: Contoso.DigitalGoods.TokenService.API/Dockerfile
+

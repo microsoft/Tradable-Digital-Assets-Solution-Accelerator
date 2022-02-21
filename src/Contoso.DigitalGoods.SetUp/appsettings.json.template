@@ -1,0 +1,16 @@
+{
+  "Identity": {
+    "SubscriptionId": "",
+    "ResourceGroupName": "",
+    "DatabaseAccountName": "",
+    "ManagedIdentityId": ""
+  },
+  "Settings": {
+    "ServiceEndpoint": "http://{tokenserviceendpoint}",
+    "BlockchainNetworkName": "ContosoGoods Network",
+    "BlockchainNetworkDescription": "ContosoGoods blokchain Network",
+    "BlockchainNetworkTxNode": "{transactionNodeUri}",
+    "PartyName": "Contoso Goods",
+    "PartyDescription": "Contoso Goods Party"
+  }
+}

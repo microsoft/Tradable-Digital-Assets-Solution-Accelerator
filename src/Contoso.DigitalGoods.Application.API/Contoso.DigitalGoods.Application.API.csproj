@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>750df104-436a-4124-acd2-0127be9986d6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\Contoso.DigitalGoods.Application.API.xml</DocumentationFile>
+    <OutputPath>bin\Release\netcoreapp3.0\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.DataProtection.Keys" Version="1.1.0" />
+    <PackageReference Include="EAE.Solutions.CosmosDB.Security.ManagedIdentity" Version="0.7.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.AzureStorage" Version="3.1.22" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contoso.DigitalGoods.Application.Models\Contoso.DigitalGoods.Application.Models.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.ContosoProfile.Service\Contoso.DigitalGoods.ContosoProfile.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalGoodsGift.Service\Contoso.DigitalGoods.DigitalGoodsGift.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.DigitalLocker.App\Contoso.DigitalGoods.DigitalLocker.App.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.ProductCatalog.Service\Contoso.DigitalGoods.ProductCatalog.Service.csproj" />
+    <ProjectReference Include="..\Contoso.DigitalGoods.TokenAPI.Proxy\Contoso.DigitalGoods.TokenAPI.Proxy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,6 @@
+<Playlist Version="1.0">
+  <Add Test="Contoso.CryptoGoods.TokenService.ServiceWrapper.Test.TestWrapper.TokenServiceWrapper_GetTokenConnection" />
+  <Add Test="Contoso.CryptoGoods.TokenService.ServiceWrapper.Test.TestWrapper.TokenServiceWrapper_Should_be_InstancedWithConnection" />
+  <Add Test="Contoso.CryptoGoods.TokenService.ServiceWrapper.Test.TestWrapper.Token_Should_be_Created" />
+  <Add Test="Contoso.CryptoGoods.TokenService.ServiceWrapper.Test.TestWrapper.TokenName_Should_be_Quoried" />
+</Playlist>
