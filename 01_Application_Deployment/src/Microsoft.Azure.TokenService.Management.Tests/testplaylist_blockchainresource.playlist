@@ -1,6 +1,0 @@
-<Playlist Version="1.0">
-  <Add Test="Microsoft.Azure.TokenService.Management.Tests.BlockchainNetworkTests.RegisterOrUpdateTest" />
-  <Add Test="Microsoft.Azure.TokenService.Management.Tests.BlockchainNetworkTests.GetTest" />
-  <Add Test="Microsoft.Azure.TokenService.Management.Tests.BlockchainNetworkTests.GetAllTest" />
-  <Add Test="Microsoft.Azure.TokenService.Management.Tests.BlockchainNetworkTests.UnRegisterTest" />
-</Playlist>
