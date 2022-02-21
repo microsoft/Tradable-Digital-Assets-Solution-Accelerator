@@ -65,8 +65,8 @@ After resource deployment is complete, you will have these services available: A
 
 Resources can also be deployed into your Azure Subscription by using one of these Deploy Azure links:  
 
-[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FDTA-Dev-SA%2Fmain%2Fdeployment%2FResource_Deployment%2FARMTemplates%2FJson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABQNU3BYKDO3CMQANSGPHV36YQTWU6Q)&emsp;&emsp;&emsp;
-[![Deploy To Azure US Gov](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FDTA-Dev-SA%2Fmain%2Fdeployment%2FResource_Deployment%2FARMTemplates%2FJson%2Fmain.json%3Ftoken%3DGHSAT0AAAAAABQNU3BYKDO3CMQANSGPHV36YQTWU6Q)&emsp;&emsp;&emsp;
+[![Deploy to Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FTradable-Digital-Assets-Solution-Accelerator%2Fmaster%2Fdeployment%2FResource_Deployment%2FARMTemplates%2FJson%2Fmain.json)&emsp;&emsp;&emsp;
+[![Deploy To Azure US Gov](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FTradable-Digital-Assets-Solution-Accelerator%2Fmaster%2Fdeployment%2FResource_Deployment%2FARMTemplates%2FJson%2Fmain.json)&emsp;&emsp;&emsp;
 
 **Note: Follow all steps from "Step 3" in [Resources Deployment](./deployment/Resource_Deployment/README.md#Step-3-Configure-Managed-Identity) to configure managed identity permissions, if you have deployed resources using one of these Azure links.**
 
